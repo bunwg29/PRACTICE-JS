@@ -1,0 +1,24 @@
+
+@font-face {
+   font-family: InterRegular;
+   src: url("/src/assets/fonts/Inter-Regular.ttf") format(truetype);
+}
+
+@mixin font ($font-size, $font-weight) {
+   font-family: $primary-font;
+   font-size: $font-size;
+   font-weight: $font-weight;
+   line-height: normal;
+}
+
+@mixin font-heading () {
+   @include font ($fs-medium , $fw-second);
+}
+
+@mixin font-decription () {
+   @include font($fs-medium, $fw-first);
+}
+
+@mixin font-status () {
+   @include font($fs-small, $fw-second);
+}

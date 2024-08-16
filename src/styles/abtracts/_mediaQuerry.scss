@@ -1,0 +1,20 @@
+// Mixin use for responsive
+
+
+@mixin mobile {
+   @media (max-width: 479px) {
+      @content;
+   }
+}
+
+@mixin tablet {
+  @media (min-width: 480px) and (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}

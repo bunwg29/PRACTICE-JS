@@ -1,3 +1,39 @@
-p {
-    font-size: 100px;
+@use "../base/" as *;
+
+body {
+   width: 100%;
+   background-color: $bgcl-main;
+   height: 100vh;
 }
+#root {
+   @include flexStyle (none, center, column);
+}
+
+header {
+   color: $tcl-first;
+   width: 75%;
+   @include flexStyle (none, none, column);
+   gap: 1em;
+
+   .heading {
+      @include font-heading();
+   }
+
+   nav {
+      @include flexStyle (space-between, none, row);
+      @include font ($primary-font, $fs-medium, $fw-second);
+
+      .nav-option {
+         ul {
+            display: flex;
+            gap: 2em;
+            a {
+               color: $tcl-first;
+               text-decoration: none;
+            }
+         }
+      }
+      // gap: 2em;
+   }
+}
+

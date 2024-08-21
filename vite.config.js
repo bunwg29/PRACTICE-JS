@@ -1,16 +1,17 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: 'src', 
-  build: {
-    outDir: 'dist' 
-  },
+   base: '/',
+   root: 'src',
+   build: {
+      outDir: 'dist'
+   },
 
-  resolve: {
-    alias: {
-      "@": "/src",
-    },
-  }
+   resolve: {
+      alias: {
+         "@": "/src",
+      },
+   }
 })
 
 

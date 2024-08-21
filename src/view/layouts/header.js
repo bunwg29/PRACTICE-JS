@@ -8,10 +8,10 @@ const header = () => {
       <nav>
          <div class="nav-option">
             <ul>
-               <a href="" class="nav-option-1">All</a>
-               <a href="" class="nav-option-2">Paid</a>
-               <a href="" class="nav-option-3">Unpaid</a>
-               <a href="" class="nav-option-4">Overdue</a>
+               <a href="/dashboard" class="nav-option-1">All</a>
+               <a href="/paid" class="nav-option-2">Paid</a>
+               <a href="/unpaid" class="nav-option-3">Unpaid</a>
+               <a href="/overdue" class="nav-option-4">Overdue</a>
             </ul>
          </div>
 

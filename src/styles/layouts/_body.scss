@@ -1,0 +1,20 @@
+@use "../base" as *;
+
+
+body {
+   padding: 10vh;
+   background-color: $bgcl-main;
+   @include flexStyle (center, none, row);
+}
+#root {
+   width: 75%;
+   height: 100vh;
+   @include flexStyle (none, center, column);
+
+   .container {
+      width: 100%;
+      // .main {
+      //    width: 100%;
+      // }
+   }
+}

@@ -1,17 +1,8 @@
 @use "../base/" as *;
 
-body {
-   width: 100%;
-   background-color: $bgcl-main;
-   height: 100vh;
-}
-#root {
-   @include flexStyle (none, center, column);
-}
-
 header {
    color: $tcl-first;
-   width: 75%;
+   width: 100%;
    @include flexStyle (none, none, column);
    gap: 1em;
 
@@ -33,7 +24,6 @@ header {
             }
          }
       }
-      // gap: 2em;
    }
 }
 

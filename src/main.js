@@ -1,4 +1,2 @@
 import './main.scss';
-import './view/view';
-
-
+import './router/processRoutes';

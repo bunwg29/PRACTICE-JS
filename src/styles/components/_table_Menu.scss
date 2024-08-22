@@ -1,0 +1,54 @@
+@use "../abtracts/" as *;
+
+.menu {
+
+   @include flexStyle(space-around, center, row);
+   padding: 10px 0;
+   background-color: $bgcl-item-profile;
+   border-radius: 10px 10px  0 0;
+   box-shadow: 2px 2px 5px 0px $bs-menu;
+   & > * {
+      @include flexStyle(space-around, center, row);
+      gap: 5%;
+      padding: 0.5%;
+   }
+
+   &-filter {
+      background-color: $bgcl-item-profile;
+      border-radius: 6px;
+      border-color: $bgcl-main;
+      border-style: solid;
+      p {
+         @include font ($primary-font, $fs-big, $fw-first);
+         display: flex;
+         align-items: center;
+         flex-direction: row;
+         gap: 1em;
+      }
+
+   }
+   &-search {
+
+      width: 40%;
+      background-color: $bgcl-main;
+      border-radius: 10px;
+
+      input {
+         background-color: $bgcl-main;
+         padding: 1.5%;
+         width: 85%;
+         border: none;
+         outline: none;
+      }
+
+   }
+
+   &-pay {
+      padding: 1%;
+      @include font ($primary-font, $fs-big, $fw-button);
+      border-radius: 10px;
+      border: none;
+      color: $bgcl-item-profile;
+      background-color: $bgcl-buttonPay;
+   }
+}

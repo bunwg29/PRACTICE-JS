@@ -12,9 +12,16 @@ body {
 
    .container {
       width: 100%;
-      .main {
-         @include flexStyle (none, none, column);
-         gap: 1em;
+      @include flexStyle (none, none, column);
+      gap: 1em;
+
+      main {
+         width: 100%;
+         padding: 10px 0;
+         background-color: $bgcl-item-profile;
+         border-radius: 10px;
+         box-shadow: 2px 2px 5px 0px $bs-menu;
+
       }
    }
 }

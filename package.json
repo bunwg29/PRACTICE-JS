@@ -33,5 +33,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "dependencies": {
+    "json-server": "^0.17.4"
   }
 }

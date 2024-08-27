@@ -1,8 +1,8 @@
-import view from "../view/view";
+import view from "../view/view.js";
 
 const routes = {
   '^/': {
-    template: view().Dashboard,
+    template: () => view.Dashboard(),
   },
   '^/paid$': {
    //  template: view().Paid,
@@ -14,7 +14,7 @@ const routes = {
    //  template: view().Overdue,
   },
   '404': {
-    template: view().Dashboard, // Hoặc hiển thị trang 404 riêng
+   //  template:  // Hoặc hiển thị trang 404 riêng
   }
 };
 

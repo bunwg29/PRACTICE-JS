@@ -5,7 +5,7 @@ const parseRequestURL = () => {
   return url;
 };
 
-const router = async () => { 
+const router = async () => {
   const path = parseRequestURL();
 
   let found = Object.keys(routes).find(route => {
@@ -20,8 +20,8 @@ const router = async () => {
       const container = await routes[found].template();
       document.getElementById('root').appendChild(container);
     } catch (error) {
-      console.error("Lỗi khi render:", error);
-      document.getElementById('root').innerHTML = '<h3>Lỗi khi tải trang</h3>';
+      console.error("Error when render:", error);
+      document.getElementById('root').innerHTML = '<h3>Error when render</h3>';
     }
   } else {
     document.getElementById('root').innerHTML = '<h3>Not Found</h3>';

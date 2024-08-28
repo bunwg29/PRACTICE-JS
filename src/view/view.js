@@ -1,7 +1,7 @@
 import header from "./layouts/header";
 import menuTable from "./components/menuTable";
 import menuTitle from "./components/menuTitle";
-import userController from "../controllers/userController";
+import renderAllUser from "./renderAllUser";
 
 const Dashboard = async () => {
    const container = document.createElement('div');
@@ -21,14 +21,14 @@ const Dashboard = async () => {
 
 
    try {
-      const userHTML = await userController.renderUser();
-   usersElement.innerHTML = userHTML;
-   main.appendChild(usersElement);
+      const userHTML = await renderAllUser.renderUser();
+      usersElement.innerHTML = userHTML;
+      main.appendChild(usersElement);
    } catch (error) {
-   console.error("Error when render user:", error);
+      console.error("Error when render user:", error);
 
-   usersElement.innerHTML = "404";
-   main.appendChild(usersElement);
+      usersElement.innerHTML = "Not found";
+      main.appendChild(usersElement);
    }
 
    return container;

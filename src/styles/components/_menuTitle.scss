@@ -1,10 +1,28 @@
 @use "../abtracts/" as *;
 
 .table-title {
-   @include flexStyle (space-between, center, row);
-   padding: 10px 10px;
+   @include flexStyle (none, center, row);
+   padding: 10px 0;
    & > * {
       @include font($primary-font, $fs-small, $fw-button);
       color: $tcl-first;
+   }
+   .checkboxMenu {
+      flex: 0.1;
+   }
+   .name {
+      flex: 0.2;
+   }
+
+   .status {
+      flex: 0.37;
+   }
+
+   .paymentStatus {
+      flex: 0.25;
+   }
+
+   .amount {
+      flex: 0.15;
    }
 }

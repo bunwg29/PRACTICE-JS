@@ -1,5 +1,6 @@
 import axios from "axios";
 
+const urlAPI = "http://localhost:3000/user_data";
 
 async function getApi (url) {
 
@@ -16,5 +17,8 @@ async function getApi (url) {
    }
 
 }
+export default axios.create({
+   baseURL: urlAPI
+});
 
 export {getApi};

@@ -1,0 +1,32 @@
+@use "../base" as *;
+
+.user {
+   .list {
+      padding: 10px 0px;
+      @include flexStyle (none, center, row);
+
+      .checkbox {
+         flex: 0.06;
+      }
+      .showinfo {
+         flex: 0.06;
+      }
+      .info-name {
+         @include flexStyle (center, left, column);
+         gap: 5px;
+         flex: 0.25;
+      }
+      .info-active {
+         flex: 0.46;
+      }
+      .info-payment {
+         flex: 0.33;
+      }
+      .info-amount {
+         flex: 0.06;
+      }
+      .button-viewmore{
+         flex: 0.08;
+      }
+   }
+}

@@ -5,8 +5,7 @@ const parseRequestURL = () => {
   return url;
 };
 
-const router = () => {
-
+const router = async () => {
   const path = parseRequestURL();
 
   let found = Object.keys(routes).find(route => {
@@ -15,12 +14,18 @@ const router = () => {
   });
 
   if (found) {
-    document.getElementById('root').innerHTML = '';
-    document.getElementById('root').appendChild(routes[found].template());
+    try {
+      document.getElementById('root').innerHTML = '';
+
+      const container = await routes[found].template();
+      document.getElementById('root').appendChild(container);
+    } catch (error) {
+      console.error("Error when render:", error);
+      document.getElementById('root').innerHTML = '<h3>Error when render</h3>';
+    }
   } else {
     document.getElementById('root').innerHTML = '<h3>Not Found</h3>';
   }
-
 };
 
 window.addEventListener('hashchange', router);

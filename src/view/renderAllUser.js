@@ -1,70 +1,47 @@
 import { getAllUser } from '../services/processApi.js';
-
+import headingTable from './components/headingTable.js';
 const renderUser = async () => {
-try {
-   const users = await getAllUser();
 
-   const userElement = users.map(user => `
-      <div class = "list">
-         <a class = "checkbox" href=""><img src="../assets/icons/userNonCheckbox.svg" alt="checkbox">
-         <a class = "showinfo" href=""><img src="../assets/icons/showProfile.svg" alt="show-profile"></a>
+   try {
 
-         <div class = "info-name">
-            <div class = "info-name__firstname">
-               ${user.firstname} ${user.lastname}
-            </div>
+      const users = await getAllUser();
 
-            <div class = "info-name__email">
-               ${user.email}
-            </div>
-         </div>
+      const userElement = users.map(user => `
+         <tr class="list-user">
+            <td class="list-user__checkbox"><img src="../assets/icons/userNonCheckbox.svg" alt="checkbox"></td>
+            <td class="list-user__viewinfo"><img src="../assets/icons/showProfile.svg" alt=""></td>
+            <td class="list-user__name">
+               <div class="list-user__name-full">${user.firstname} ${user.lastname}</div>
+               <div class="list-user__name-email">${user.email}</div>
+            </td>
+            <td class="list-user__active">
+               <p class="list-user__active-status">${user.active_status}</p>
+               <p class="list-user__active-login">Last login: ${user.last_login}</p>
+            </td>
+            <td class="list-user__payment">
+               <p class="list-user__payment-status">${user.paid_status}</p>
+               <p class="list-user__payment-day">${user.paid_day}</p>
+            </td>
+            <td class="list-user__amount">
+               <p class="list-user__amount-money">${user.amount}</p>
+               <p class="list-user__amount-currency">USD</p>
+            </td>
+            <td class="list-user__viewmore">
+               <button class="list-user__viewmore-b">View More</button>
+            </td>
+            <td class="list-user__addOp"><img src="../assets/icons/viewMoreOption.svg" alt="Addtional option"></td>
+         </tr>
+      `,
+      );
 
-         <div class = "info-active">
-               <div class = "info-active__status">
-                  ${user.active_status}
-               </div>
+      return userElement.join("");
 
-               <div class = "info-active__login">
-                  <p>Last login: ${user.last_login}</p>
-               </div>
-         </div>
-
-         <div class = "info-payment">
-               <div class = "info-payment__status">
-                  ${user.paid_status}
-               </div>
-
-               <div class = "info-payment__day">
-                  ${user.paid_day}
-               </div>
-         </div>
-
-
-
-         <div class = "info-amount">
-               ${user.amount}
-               <p>USD</p>
-         </div>
-         <button class = "button-viewmore">View More</button>
-         <a class = "viewmore" href=""><img src="../assets/icons/viewMoreOption.svg" alt="show-profile"></a>
-      </div>
-   `,
-   );
-
-
-   return userElement.join("");
-
-} catch (error) {
+   } catch (error) {
 
    console.error('Error when get data', error);
    return 'Get error';
 
-}
+   }
 };
 
 export default { renderUser };
-/*
-
-
-
-*/

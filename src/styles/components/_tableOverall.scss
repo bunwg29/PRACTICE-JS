@@ -1,0 +1,17 @@
+@use "../base/" as *;
+.list {
+   width: 100%;
+   margin-top: 30px;
+   tr {
+      @include flexStyle (none, center, row);
+   }
+   &-user {
+      &__name {
+         width: 25%;
+      }
+
+      &__active {
+         width: 20%;
+      }
+   }
+}

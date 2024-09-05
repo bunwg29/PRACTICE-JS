@@ -1,17 +1,18 @@
 import routes from "./routes";
 
+
 const parseRequestURL = () => {
-  let url = location.hash.slice(1).toLowerCase() || '/';
-  return url;
+   let url = location.hash.slice(1).toLowerCase() || '/';
+   return url;
 };
 
 const router = async () => {
+
+
+
   const path = parseRequestURL();
 
-  let found = Object.keys(routes).find(route => {
-    const regex = new RegExp(route);
-    return regex.test(path);
-  });
+  let found = Object.keys(routes).find(route => route === path);
 
   if (found) {
     try {
@@ -28,5 +29,8 @@ const router = async () => {
   }
 };
 
-window.addEventListener('hashchange', router);
+window.addEventListener('hashchange', () => {
+   console.log("Hash changed!", location.hash);
+   router();
+ });
 window.addEventListener('load', router);

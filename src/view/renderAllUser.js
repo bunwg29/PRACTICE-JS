@@ -1,12 +1,8 @@
-import { getAllUser } from '../services/processApi.js';
-
-const renderUser = async () => {
-try {
-   const users = await getAllUser();
-
-   const userElement = users.map(user => `
+import {getAllUser, getPaidUser, getUnPaidUser, getOverdueUser} from '../services/processApi.js';
+const contentInTable = (user) => {
+   return `
       <div class = "list">
-         <a class = "checkbox" href=""><img src="../assets/icons/userNonCheckbox.svg" alt="checkbox">
+         <a class = "checkbox" href="#/${user.id}"><img src="../assets/icons/userNonCheckbox.svg" alt="checkbox">
          <a class = "showinfo" href=""><img src="../assets/icons/showProfile.svg" alt="show-profile"></a>
 
          <div class = "info-name">
@@ -48,23 +44,60 @@ try {
          <button class = "button-viewmore">View More</button>
          <a class = "viewmore" href=""><img src="../assets/icons/viewMoreOption.svg" alt="show-profile"></a>
       </div>
-   `,
-   );
-
-
-   return userElement.join("");
-
-} catch (error) {
-
-   console.error('Error when get data', error);
-   return 'Get error';
-
+   `;
 }
+
+const renderUser = async () => {
+   try {
+      const users = await getAllUser();
+
+      const userElement = users.map(user => contentInTable(user));
+
+      return userElement.join("");
+
+   } catch (error) {
+      console.error('Error when get data', error);
+      return 'Get error';
+   }
 };
 
-export default { renderUser };
-/*
+const renderPaidUser = async () => {
+   try {
+      const users = await getPaidUser();
 
+      const userElement = users.map(user => contentInTable(user));
 
+      return userElement.join("");
 
-*/
+   } catch (error) {
+      console.error('Error when get data', error);
+      return 'Get error';
+   }
+};
+
+const renderUnpaidUser = async () => {
+   try {
+      const users = await getUnPaidUser();
+
+      const userElement = users.map(user => contentInTable(user));
+
+      return userElement.join("");
+   } catch (error) {
+      console.error('Error when get data', error);
+      return 'Get error';
+   }
+}
+
+const renderOverdueUser = async () => {
+   try {
+      const users = await getOverdueUser();
+
+      const userElement = users.map(user => contentInTable(user));
+
+      return userElement.join("");
+   } catch (error) {
+      console.error('Error when get data', error);
+      return 'Get error';
+   }
+}
+export default { renderUser, renderPaidUser, renderUnpaidUser, renderOverdueUser };

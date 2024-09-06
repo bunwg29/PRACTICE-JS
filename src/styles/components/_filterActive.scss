@@ -1,0 +1,39 @@
+@use "../base/" as *;
+
+.filter-active {
+   width: 120px;
+   padding: 20px;
+   position: absolute;
+   top: 50px;
+   left: -5px;
+   @include flexStyle (none, none, column);
+   gap: 10px;
+   background-color: $tcl-button;
+   z-index: 100;
+   border-radius: 10px;
+   box-shadow: 2px 2px 5px 0px $bs-menu;
+
+   .sort > *,
+   .users > * {
+      @include flexStyle (none, none, column);
+      gap: 5px;
+   }
+
+   .sort, .users {
+      @include flexStyle (none, none, column);
+      gap: 10px;
+   }
+   label {
+      @include font-decription();
+      @include flexStyle (space-between, none, row);
+   }
+
+   label :hover {
+      background-color: $bgcl-inactiveStatus;
+   }
+   .sort-title, .users-title {
+      text-align: left;
+      @include font ($primary-font, $fs-small, $fw-first);
+      color: $tcl-first;
+   }
+}

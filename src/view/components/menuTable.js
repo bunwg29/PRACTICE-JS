@@ -8,7 +8,7 @@ const menuTable = () => {
             <button class="menu-left-filter">
                <img src="../assets/icons/filter.svg" alt="filter-icon">
                <p>Filter</p>
-
+               ${filter()}
             </button>
             <div class="menu-left-search">
                <img src="../assets/icons/searchOption.svg" alt="search-bar">
@@ -18,7 +18,6 @@ const menuTable = () => {
 
          <button class="menu-pay">PAY DUES</button>
 
-         ${filter()}
       </div>
    `;
 

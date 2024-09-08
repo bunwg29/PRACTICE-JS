@@ -1,21 +1,21 @@
-import { Dashboard, PaidContent, UnpaidContent, OverdueContent } from "../view/view.js";
-
 const routes = {
+
   '/': {
-    template:() => Dashboard(),
+    template: (view) => view.Dashboard(),
   },
   '/paid': {
-    template:() => PaidContent(),
+    template: (view) => view.PaidContent(),
   },
   '/unpaid': {
-    template:() => UnpaidContent(),
+    template: (view) => view.UnpaidContent(),
   },
   '/overdue': {
-    template: () => OverdueContent(),
+    template: (view) => view.OverdueContent(),
   },
   '404': {
-   //  template:  // Hoặc hiển thị trang 404 riêng
+    template: () => '<h3>Not Found</h3>',
   }
+  
 };
 
 export default routes;

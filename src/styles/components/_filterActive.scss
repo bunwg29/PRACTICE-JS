@@ -26,11 +26,44 @@
    label {
       @include font-decription();
       @include flexStyle (space-between, none, row);
+
+      input[type="radio"] {
+         appearance: none;
+         -webkit-appearance: none;
+         width: 16px;
+         height: 16px;
+         border: 2px solid #ccc;
+         border-radius: 50%;
+         margin-right: 10px;
+         cursor: pointer;
+         position: relative;
+      }
+
+      input[type="radio"]:checked {
+         border-color: #7854f7;
+         background-color: #7854f7;
+      }
+
+
+      input[type="radio"]:checked::before {
+         content: '';
+         display: block;
+         width: 5px;
+         height: 5px;
+         border-radius: 50%;
+         background-color: white;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+       }
    }
 
-   label :hover {
+   li:hover {
       background-color: $bgcl-inactiveStatus;
+      border-radius: 5px;
    }
+
    .sort-title, .users-title {
       text-align: left;
       @include font ($primary-font, $fs-small, $fw-first);

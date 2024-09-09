@@ -1,21 +1,21 @@
-import view from "../view/view.js";
-
 const routes = {
-  '^/': {
-    template: () => view.Dashboard(),
+
+  '/': {
+    template: (view) => view.Dashboard(),
   },
-  '^/paid$': {
-   //  template: view().Paid,
+  '/paid': {
+    template: (view) => view.PaidContent(),
   },
-  '^/unpaid$': {
-   //  template: view().Unpaid,
+  '/unpaid': {
+    template: (view) => view.UnpaidContent(),
   },
-  '^/overdue$': {
-   //  template: view().Overdue,
+  '/overdue': {
+    template: (view) => view.OverdueContent(),
   },
   '404': {
-   //  template:  // Hoặc hiển thị trang 404 riêng
+    template: () => '<h3>Not Found</h3>',
   }
+  
 };
 
 export default routes;

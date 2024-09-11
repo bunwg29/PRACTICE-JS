@@ -1,11 +1,24 @@
 import './main.scss';
 import './router/processRoutes';
-import filterController from './controllers/filterController';
-import View from './view/view';
 import processRoutes from './router/processRoutes';
+import UserController from './controllers/userController';
+import View from './view/view';
 
-const controller = new filterController();
+const initApp = () => {
+   const userController = new UserController();
+   const view = new View();
 
-const view = new View(controller);
+   userController.setView(view);
+   view.setUserController(userController);
 
-processRoutes(view);
+   processRoutes(view);
+
+   return {
+      userController,
+      view
+   };
+}
+
+const app = initApp();
+
+export default app;

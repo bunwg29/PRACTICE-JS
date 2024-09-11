@@ -2,10 +2,17 @@ import header from './layouts/header';
 import menuTable from './components/menuTable';
 import menuTitle from './components/menuTitle';
 import renderAllUser from './utils/renderAllUser';
+import FilterView from './utils/filterView';
 
 export default class View {
-   constructor(controller) {
-      this.controller = controller;
+
+   constructor() {
+      this.userController = null;
+      this.currentUsers = [];
+    }
+
+   setUserController(userController) {
+      this.userController = userController;
    }
 
    static createMainElement() {
@@ -16,9 +23,9 @@ export default class View {
       return main;
    }
 
-   static async renderContent(renderFunction, usersElement, main) {
+   static async renderContent(users, usersElement, main) {
       try {
-         const userHTML = await renderFunction();
+         const userHTML = renderAllUser.renderUsers(users);
          usersElement.innerHTML = userHTML;
          main.appendChild(usersElement);
       } catch (error) {
@@ -28,7 +35,7 @@ export default class View {
       }
    }
 
-   async renderUserType(renderFunction) {
+   async renderUserType(fetchFunction) {
       const container = document.createElement('div');
       container.className = 'container';
 
@@ -40,34 +47,43 @@ export default class View {
       container.appendChild(main);
 
       try {
-         await View.renderContent(renderFunction, usersElement, main);
+         this.filterView = new FilterView(this.userController);
+         
+         const users = await fetchFunction();
+
+         this.currentUsers = users || [];
+
+         await View.renderContent(users, usersElement, main);
 
          const filterButton = container.querySelector('.menu-left-filter');
+
          if (filterButton) {
-         filterButton.addEventListener('click', () => {
-            this.controller.handleFilterClick(filterButton);
-         });
+            filterButton.addEventListener('click', () => {
+               this.filterView.displayFilter();
+            });
          }
       } catch (error) {
          console.error('Error: ', error);
+         this.currentUsers = [];
       }
 
       return container;
    }
 
    async Dashboard() {
-      return this.renderUserType(renderAllUser.renderUser);
+      return this.renderUserType(this.userController.fetchAllUsers.bind(this.userController));
    }
 
    async PaidContent() {
-      return this.renderUserType(renderAllUser.renderPaidUser);
+      return this.renderUserType(this.userController.fetchPaidUsers.bind(this.userController));
    }
 
    async UnpaidContent() {
-      return this.renderUserType(renderAllUser.renderUnpaidUser);
+      return this.renderUserType(this.userController.fetchUnpaidUsers.bind(this.userController));
    }
 
    async OverdueContent() {
-      return this.renderUserType(renderAllUser.renderOverdueUser);
+      return this.renderUserType(this.userController.fetchOverdueUsers.bind(this.userController));
    }
+
 }

@@ -1,5 +1,8 @@
 @use "../base/" as *;
 
+.filter-active.hidden {
+   display: none;
+}
 .filter-active {
    width: 120px;
    padding: 20px;

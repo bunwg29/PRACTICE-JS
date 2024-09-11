@@ -1,6 +1,6 @@
 const filter = () => {
    return `
-      <div class="filter-active">
+      <div class="filter-active hidden">
          <div class="sort">
             <p class="sort-title">SORT BY:</p>
             <ul class="sort-options">
@@ -49,13 +49,13 @@ const filter = () => {
                <li>
                   <label>
                      Active
-                     <input type="radio" name="users" value="active">
+                     <input type="radio" name="users" value="Active">
                   </label>
                </li>
                <li>
                   <label>
                      Inactive
-                     <input type="radio" name="users" value="inactive">
+                     <input type="radio" name="users" value="Inactive">
                   </label>
                </li>
             </ul>

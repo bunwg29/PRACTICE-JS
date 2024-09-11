@@ -1,3 +1,5 @@
+import filter from "./filter";
+
 const menuTable = () => {
 
    return `
@@ -7,6 +9,7 @@ const menuTable = () => {
             <button class="menu-left-filter">
                <img src="../assets/icons/filter.svg" alt="filter-icon">
                <p>Filter</p>
+               ${filter()}
             </button>
             <div class="menu-left-search">
                <img src="../assets/icons/searchOption.svg" alt="search-bar">

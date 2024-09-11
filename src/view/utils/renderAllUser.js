@@ -1,9 +1,4 @@
-import {
-  getAllUser,
-  getPaidUser,
-  getUnPaidUser,
-  getOverdueUser,
-} from '../../services/processApi.js';
+
 const contentInTable = user => {
   return `
       <div class = "list">
@@ -52,60 +47,18 @@ const contentInTable = user => {
    `;
 };
 
-const renderUser = async () => {
-  try {
-    const users = await getAllUser();
+const renderUsers = (users) => {
+   try {
 
-    const userElement = users.map(user => contentInTable(user));
+      const userElement = users.map(user => contentInTable(user));
+      return userElement.join('');
 
-    return userElement.join('');
-  } catch (error) {
-    console.error('Error when get data', error);
-    return 'Get error';
-  }
-};
+   } catch (error) {
 
-const renderPaidUser = async () => {
-  try {
-    const users = await getPaidUser();
+      console.error('Error rendering users', error);
+      return 'Error rendering users';
 
-    const userElement = users.map(user => contentInTable(user));
+   }
+}
 
-    return userElement.join('');
-  } catch (error) {
-    console.error('Error when get data', error);
-    return 'Get error';
-  }
-};
-
-const renderUnpaidUser = async () => {
-  try {
-    const users = await getUnPaidUser();
-
-    const userElement = users.map(user => contentInTable(user));
-
-    return userElement.join('');
-  } catch (error) {
-    console.error('Error when get data', error);
-    return 'Get error';
-  }
-};
-
-const renderOverdueUser = async () => {
-  try {
-    const users = await getOverdueUser();
-
-    const userElement = users.map(user => contentInTable(user));
-
-    return userElement.join('');
-  } catch (error) {
-    console.error('Error when get data', error);
-    return 'Get error';
-  }
-};
-export default {
-  renderUser,
-  renderPaidUser,
-  renderUnpaidUser,
-  renderOverdueUser,
-};
+export default { renderUsers };

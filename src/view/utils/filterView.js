@@ -1,49 +1,33 @@
-import filter from '../components/filter';
 
 export default class FilterView {
-   constructor(controller) {
-      this.controller = controller;
-      this.filterDropdown = null;
+
+   constructor(userController) {
+      this.userController = userController;
    }
 
-   render(filterButton) {
-      if (this.filterDropdown) {
-         this.filterDropdown.remove();
-         this.filterDropdown = null;
-      } else {
-         this.filterDropdown = document.createElement('div');
-         this.filterDropdown.classList.add('filter-content');
-         this.filterDropdown.innerHTML = filter();
-         filterButton.appendChild(this.filterDropdown);
-         this.attachEventListeners();
+   displayFilter() {
+      const filterActive = document.querySelector('.filter-active');
+
+      if(filterActive.classList.contains('hidden')) {
+         filterActive.classList.remove('hidden');
       }
-   }
+      else {
+         filterActive.classList.add('hidden');
+      }
 
-   attachEventListeners() {
+      const sortRadios = document.querySelectorAll('input[name="sort"]');
+      sortRadios.forEach(radio => {
+         radio.addEventListener('change', () => {
+            this.userController.handleSortChange(radio.value);
+         });
+      })
 
-      document.addEventListener('click', (event) => {
-         if (
-           this.filterDropdown &&
-           !this.filterDropdown.contains(event.target) &&
-           !event.target.closest('.menu-left-filter')
-         ) {
-           this.filterDropdown.remove();
-         }
+      const userRadios = document.querySelectorAll('input[name="users"]');
+      userRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          this.userController.handleUserChange(radio.value);
+        });
       });
-
-      // const sortRadios = this.filterDropdown.querySelectorAll('input[name="sort"]');
-      // sortRadios.forEach(radio => {
-      //    radio.addEventListener('change', () => {
-      //       this.controller.handleUserFilterChange(radio.value);
-      //    });
-      // })
-
-      // const userRadios = this.filterDropdown.querySelectorAll('input[name="users"]');
-      // userRadios.forEach(radio => {
-      //   radio.addEventListener('change', () => {
-      //     this.controller.handleUserFilterChange(radio.value);
-      //   });
-      // });
    }
 }
 

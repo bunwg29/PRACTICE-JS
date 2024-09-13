@@ -3,6 +3,9 @@ const routes = {
   '/': {
     template: (view) => view.Dashboard(),
   },
+  '/all': {
+    template: (view) => view.Dashboard(),
+  },
   '/paid': {
     template: (view) => view.PaidContent(),
   },
@@ -15,7 +18,7 @@ const routes = {
   '404': {
     template: () => '<h3>Not Found</h3>',
   }
-  
+
 };
 
 export default routes;

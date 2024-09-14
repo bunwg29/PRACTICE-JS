@@ -1,241 +1,241 @@
 {
-   "user_data": [
-     {
-       "id": 1,
-       "firstname": "Cristiano",
-       "lastname": "Ronaldo",
-       "email": "ronaldogoal1@gmail.com",
-       "active_status": "Active",
-       "last_login": "2024-08-14",
-       "paid_status": "Paid",
-       "paid_day": "2024-08-15",
-       "amount": "$200",
-       "activity": [
-         {
-           "date": "2024-09-01",
-           "user_activity": "Logged in from new device.",
-           "detail": "User logged in from a new device located in Portugal."
-         },
-         {
-           "date": "2024-08-30",
-           "user_activity": "Updated payment details.",
-           "detail": "User updated their credit card information for future payments."
-         },
-         {
-           "date": "2024-08-15",
-           "user_activity": "Paid subscription fee.",
-           "detail": "User paid the monthly subscription fee of $200."
-         }
-       ]
-     },
-     {
-       "id": 2,
-       "firstname": "Bruno",
-       "lastname": "Fernandes",
-       "email": "brunomanu1@gmail.com",
-       "active_status": "Inactive",
-       "last_login": "2024-08-12",
-       "paid_status": "Overdue",
-       "paid_day": "2024-08-23",
-       "amount": "$300",
-       "activity": [
-         {
-           "date": "2024-08-10",
-           "user_activity": "Subscription overdue notice.",
-           "detail": "User received a notification about overdue payment for the subscription."
-         },
-         {
-           "date": "2024-08-01",
-           "user_activity": "Changed email address.",
-           "detail": "User updated their email address to brunomanu1@gmail.com."
-         }
-       ]
-     },
-     {
-       "id": 3,
-       "firstname": "Alejandro",
-       "lastname": "Garnacho",
-       "email": "garnachomanu@gmail.com",
-       "active_status": "Active",
-       "last_login": "2024-08-16",
-       "paid_status": "Unpaid",
-       "paid_day": "2024-08-25",
-       "amount": "$600",
-       "activity": [
-         {
-           "date": "2024-08-15",
-           "user_activity": "Failed payment attempt.",
-           "detail": "User attempted to pay the subscription fee, but the payment failed."
-         },
-         {
-           "date": "2024-08-05",
-           "user_activity": "Updated profile picture.",
-           "detail": "User uploaded a new profile picture."
-         }
-       ]
-     },
-     {
-       "id": 4,
-       "firstname": "Lionel",
-       "lastname": "Messi",
-       "email": "leomessi10@gmail.com",
-       "active_status": "Active",
-       "last_login": "2024-08-17",
-       "paid_status": "Paid",
-       "paid_day": "2024-08-01",
-       "amount": "$1000",
-       "activity": [
-         {
-           "date": "2024-08-01",
-           "user_activity": "Paid yearly subscription.",
-           "detail": "User paid a yearly subscription fee of $1000."
-         },
-         {
-           "date": "2024-07-15",
-           "user_activity": "Updated billing address.",
-           "detail": "User updated the billing address to a new location in Paris."
-         }
-       ]
-     },
-     {
-       "id": 5,
-       "firstname": "Neymar",
-       "lastname": "Jr",
-       "email": "neymarjr@gmail.com",
-       "active_status": "Inactive",
-       "last_login": "2024-07-28",
-       "paid_status": "Overdue",
-       "paid_day": "2024-08-10",
-       "amount": "$500",
-       "activity": [
-         {
-           "date": "2024-08-11",
-           "user_activity": "Received overdue payment reminder.",
-           "detail": "User was reminded of overdue payment of $500."
-         },
-         {
-           "date": "2024-07-25",
-           "user_activity": "Logged in after 30 days of inactivity.",
-           "detail": "User logged in after a period of 30 days of inactivity."
-         }
-       ]
-     },
-     {
-       "id": 6,
-       "firstname": "Kylian",
-       "lastname": "Mbappé",
-       "email": "mbappe@gmail.com",
-       "active_status": "Active",
-       "last_login": "2024-08-18",
-       "paid_status": "Unpaid",
-       "paid_day": "2024-08-30",
-       "amount": "$800",
-       "activity": [
-         {
-           "date": "2024-08-28",
-           "user_activity": "Attempted to cancel subscription.",
-           "detail": "User attempted to cancel the subscription but did not complete the process."
-         },
-         {
-           "date": "2024-08-20",
-           "user_activity": "Updated password.",
-           "detail": "User successfully updated their account password."
-         }
-       ]
-     },
-     {
-       "id": 7,
-       "firstname": "Kevin",
-       "lastname": "De Bruyne",
-       "email": "kdebruyne@gmail.com",
-       "active_status": "Active",
-       "last_login": "2024-08-15",
-       "paid_status": "Paid",
-       "paid_day": "2024-08-15",
-       "amount": "$400",
-       "activity": [
-         {
-           "date": "2024-08-15",
-           "user_activity": "Paid subscription fee.",
-           "detail": "User paid the monthly subscription fee of $400."
-         },
-         {
-           "date": "2024-08-10",
-           "user_activity": "Contacted support.",
-           "detail": "User contacted support regarding payment methods."
-         }
-       ]
-     },
-     {
-       "id": 8,
-       "firstname": "Erling",
-       "lastname": "Haaland",
-       "email": "haaland@gmail.com",
-       "active_status": "Inactive",
-       "last_login": "2024-08-05",
-       "paid_status": "Overdue",
-       "paid_day": "2024-08-20",
-       "amount": "$700",
-       "activity": [
-         {
-           "date": "2024-08-19",
-           "user_activity": "Received overdue payment reminder.",
-           "detail": "User received a reminder for the overdue payment of $700."
-         },
-         {
-           "date": "2024-08-01",
-           "user_activity": "Updated profile details.",
-           "detail": "User updated personal information on their profile."
-         }
-       ]
-     },
-     {
-       "id": 9,
-       "firstname": "Robert",
-       "lastname": "Lewandowski",
-       "email": "lewandowski@gmail.com",
-       "active_status": "Active",
-       "last_login": "2024-08-19",
-       "paid_status": "Paid",
-       "paid_day": "2024-08-05",
-       "amount": "$350",
-       "activity": [
-         {
-           "date": "2024-08-05",
-           "user_activity": "Paid monthly fee.",
-           "detail": "User paid the monthly subscription fee of $350."
-         },
-         {
-           "date": "2024-07-25",
-           "user_activity": "Uploaded a new profile picture.",
-           "detail": "User uploaded a new profile picture."
-         }
-       ]
-     },
-     {
-       "id": 10,
-       "firstname": "Virgil",
-       "lastname": "van Dijk",
-       "email": "vandijk@gmail.com",
-       "active_status": "Active",
-       "last_login": "2024-08-20",
-       "paid_status": "Paid",
-       "paid_day": "2024-08-10",
-       "amount": "$250",
-       "activity": [
-         {
-           "date": "2024-08-09",
-           "user_activity": "Updated email address.",
-           "detail": "User changed their email address to vandijk@gmail.com."
-         },
-         {
-           "date": "2024-08-01",
-           "user_activity": "Subscribed to newsletter.",
-           "detail": "User subscribed to the monthly newsletter."
-         }
-       ]
-     },
-     {
+  "user_data": [
+    {
+      "id": 1,
+      "firstname": "Cristiano",
+      "lastname": "Ronaldo",
+      "email": "ronaldogoal1@gmail.com",
+      "active_status": "Active",
+      "last_login": "2024-08-14",
+      "paid_status": "Paid",
+      "paid_day": "2024-08-15",
+      "amount": "$200",
+      "activity": [
+        {
+          "date": "01/SEP/2024",
+          "user_activity": "Logged in from new device.",
+          "detail": "User logged in from a new device located in Portugal."
+        },
+        {
+          "date": "30/AUG/2024",
+          "user_activity": "Updated payment details.",
+          "detail": "User updated their credit card information for future payments."
+        },
+        {
+          "date": "15/AUG/2024",
+          "user_activity": "Paid subscription fee.",
+          "detail": "User paid the monthly subscription fee of $200."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "firstname": "Bruno",
+      "lastname": "Fernandes",
+      "email": "brunomanu1@gmail.com",
+      "active_status": "Inactive",
+      "last_login": "2024-08-12",
+      "paid_status": "Overdue",
+      "paid_day": "2024-08-23",
+      "amount": "$300",
+      "activity": [
+        {
+          "date": "10/AUG/2024",
+          "user_activity": "Subscription overdue notice.",
+          "detail": "User received a notification about overdue payment for the subscription."
+        },
+        {
+          "date": "01/AUG/2024",
+          "user_activity": "Changed email address.",
+          "detail": "User updated their email address to brunomanu1@gmail.com."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "firstname": "Alejandro",
+      "lastname": "Garnacho",
+      "email": "garnachomanu@gmail.com",
+      "active_status": "Active",
+      "last_login": "2024-08-16",
+      "paid_status": "Unpaid",
+      "paid_day": "2024-08-25",
+      "amount": "$600",
+      "activity": [
+        {
+          "date": "15/AUG/2024",
+          "user_activity": "Failed payment attempt.",
+          "detail": "User attempted to pay the subscription fee, but the payment failed."
+        },
+        {
+          "date": "05/AUG/2024",
+          "user_activity": "Updated profile picture.",
+          "detail": "User uploaded a new profile picture."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "firstname": "Lionel",
+      "lastname": "Messi",
+      "email": "leomessi10@gmail.com",
+      "active_status": "Active",
+      "last_login": "2024-08-17",
+      "paid_status": "Paid",
+      "paid_day": "2024-08-01",
+      "amount": "$1000",
+      "activity": [
+        {
+          "date": "01/AUG/2024",
+          "user_activity": "Paid yearly subscription.",
+          "detail": "User paid a yearly subscription fee of $1000."
+        },
+        {
+          "date": "15/JUL/2024",
+          "user_activity": "Updated billing address.",
+          "detail": "User updated the billing address to a new location in Paris."
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "firstname": "Neymar",
+      "lastname": "Jr",
+      "email": "neymarjr@gmail.com",
+      "active_status": "Inactive",
+      "last_login": "2024-07-28",
+      "paid_status": "Overdue",
+      "paid_day": "2024-08-10",
+      "amount": "$500",
+      "activity": [
+        {
+          "date": "11/AUG/2024",
+          "user_activity": "Received overdue payment reminder.",
+          "detail": "User was reminded of overdue payment of $500."
+        },
+        {
+          "date": "25/JUL/2024",
+          "user_activity": "Logged in after 30 days of inactivity.",
+          "detail": "User logged in after a period of 30 days of inactivity."
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "firstname": "Kylian",
+      "lastname": "Mbappé",
+      "email": "mbappe@gmail.com",
+      "active_status": "Active",
+      "last_login": "2024-08-18",
+      "paid_status": "Unpaid",
+      "paid_day": "2024-08-30",
+      "amount": "$800",
+      "activity": [
+        {
+          "date": "28/AUG/2024",
+          "user_activity": "Attempted to cancel subscription.",
+          "detail": "User attempted to cancel the subscription but did not complete the process."
+        },
+        {
+          "date": "20/AUG/2024",
+          "user_activity": "Updated password.",
+          "detail": "User successfully updated their account password."
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "firstname": "Kevin",
+      "lastname": "De Bruyne",
+      "email": "kdebruyne@gmail.com",
+      "active_status": "Active",
+      "last_login": "2024-08-15",
+      "paid_status": "Paid",
+      "paid_day": "2024-08-15",
+      "amount": "$400",
+      "activity": [
+        {
+          "date": "15/AUG/2024",
+          "user_activity": "Paid subscription fee.",
+          "detail": "User paid the monthly subscription fee of $400."
+        },
+        {
+          "date": "10/AUG/2024",
+          "user_activity": "Contacted support.",
+          "detail": "User contacted support regarding payment methods."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "firstname": "Erling",
+      "lastname": "Haaland",
+      "email": "haaland@gmail.com",
+      "active_status": "Inactive",
+      "last_login": "2024-08-05",
+      "paid_status": "Overdue",
+      "paid_day": "2024-08-20",
+      "amount": "$700",
+      "activity": [
+        {
+          "date": "19/AUG/2024",
+          "user_activity": "Received overdue payment reminder.",
+          "detail": "User received a reminder for the overdue payment of $700."
+        },
+        {
+          "date": "01/AUG/2024",
+          "user_activity": "Updated profile details.",
+          "detail": "User updated personal information on their profile."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "firstname": "Robert",
+      "lastname": "Lewandowski",
+      "email": "lewandowski@gmail.com",
+      "active_status": "Active",
+      "last_login": "2024-08-19",
+      "paid_status": "Paid",
+      "paid_day": "2024-08-05",
+      "amount": "$350",
+      "activity": [
+        {
+          "date": "05/AUG/2024",
+          "user_activity": "Paid monthly fee.",
+          "detail": "User paid the monthly subscription fee of $350."
+        },
+        {
+          "date": "25/JUL/2024",
+          "user_activity": "Uploaded a new profile picture.",
+          "detail": "User uploaded a new profile picture."
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "firstname": "Virgil",
+      "lastname": "van Dijk",
+      "email": "vandijk@gmail.com",
+      "active_status": "Active",
+      "last_login": "2024-08-20",
+      "paid_status": "Paid",
+      "paid_day": "2024-08-10",
+      "amount": "$250",
+      "activity": [
+        {
+          "date": "09/AUG/2024",
+          "user_activity": "Updated email address.",
+          "detail": "User changed their email address to vandijk@gmail.com."
+        },
+        {
+          "date": "01/AUG/2024",
+          "user_activity": "Subscribed to newsletter.",
+          "detail": "User subscribed to the monthly newsletter."
+        }
+      ]
+    },
+    {
       "id": 11,
       "firstname": "Mohamed",
       "lastname": "Salah",
@@ -247,12 +247,12 @@
       "amount": "$900",
       "activity": [
         {
-          "date": "2024-08-27",
+          "date": "27/AUG/2024",
           "user_activity": "Payment failed.",
           "detail": "User attempted to make a payment, but it failed due to insufficient funds."
         },
         {
-          "date": "2024-08-13",
+          "date": "13/AUG/2024",
           "user_activity": "Changed password.",
           "detail": "User successfully updated their account password."
         }
@@ -270,12 +270,12 @@
       "amount": "$450",
       "activity": [
         {
-          "date": "2024-08-22",
+          "date": "22/AUG/2024",
           "user_activity": "Payment overdue.",
           "detail": "User's payment is overdue; notified via email."
         },
         {
-          "date": "2024-08-01",
+          "date": "01/AUG/2024",
           "user_activity": "Profile updated.",
           "detail": "User updated their profile details."
         }
@@ -293,12 +293,12 @@
       "amount": "$650",
       "activity": [
         {
-          "date": "2024-08-08",
+          "date": "08/AUG/2024",
           "user_activity": "Paid yearly subscription.",
           "detail": "User paid a yearly subscription fee of $650."
         },
         {
-          "date": "2024-07-30",
+          "date": "30/JUL/2024",
           "user_activity": "Subscribed to notifications.",
           "detail": "User subscribed to notifications about new content."
         }
@@ -316,12 +316,12 @@
       "amount": "$300",
       "activity": [
         {
-          "date": "2024-08-12",
+          "date": "12/AUG/2024",
           "user_activity": "Paid subscription fee.",
           "detail": "User paid the monthly subscription fee of $300."
         },
         {
-          "date": "2024-08-01",
+          "date": "01/AUG/2024",
           "user_activity": "Changed email address.",
           "detail": "User updated their email address to kante@gmail.com."
         }
@@ -339,16 +339,16 @@
       "amount": "$550",
       "activity": [
         {
-          "date": "2024-08-31",
+          "date": "31/AUG/2024",
           "user_activity": "Payment attempt failed.",
           "detail": "User attempted to pay the subscription fee, but the payment failed."
         },
         {
-          "date": "2024-08-20",
+          "date": "20/AUG/2024",
           "user_activity": "Updated contact information.",
           "detail": "User updated their contact information in the profile settings."
         }
       ]
     }
-   ]
- }
+  ]
+}

@@ -32,7 +32,7 @@ export default function menuHandle() {
 
 export const addCheckboxEventListener = () => {
    const checkboxes = document.querySelectorAll('.checkbox');
-
+   
    checkboxes.forEach(checkbox => {
      const imgElement = checkbox.querySelector('img');
      checkbox.dataset.checked = 'false';

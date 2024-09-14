@@ -28,7 +28,6 @@ class Router {
       const found = Object.keys(this.routes).find(route => this.matchRoute(route, path));
 
       if (found) {
-        const params = this.extractParams(found, path);
 
         try {
           document.getElementById('root').innerHTML = '';
@@ -59,21 +58,6 @@ class Router {
       if (routeParts.length !== pathParts.length) return false;
 
       return routeParts.every((part, i) => part.startsWith(':') || part === pathParts[i]);
-   }
-
-   extractParams(route, path) {
-      const routeParts = route.split('/');
-      const pathParts = path.split('/');
-      const params = {};
-
-      routeParts.forEach((part, i) => {
-         if (part.startsWith('')) {
-            const paramName = part.slice(1);
-            params[paramName] = pathParts[i];
-         }
-      });
-
-      return params;
    }
 
    removeUserIdFromPath(path) {

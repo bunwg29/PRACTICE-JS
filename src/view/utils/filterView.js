@@ -1,4 +1,4 @@
-import { addCheckboxEventListener } from "@/services/handlePath";
+import { viewInfoHandle, addCheckboxEventListener } from "@/services/eventHandlers";
 export default class FilterView {
 
    constructor(userController) {
@@ -20,6 +20,7 @@ export default class FilterView {
          radio.addEventListener('change', () => {
             this.userController.handleSortChange(radio.value);
             addCheckboxEventListener();
+            viewInfoHandle();
          });
       })
 
@@ -28,6 +29,7 @@ export default class FilterView {
         radio.addEventListener('change', () => {
           this.userController.handleUserChange(radio.value);
           addCheckboxEventListener();
+          viewInfoHandle();
         });
       });
    }

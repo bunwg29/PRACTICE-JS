@@ -1,7 +1,5 @@
 import routes from "./routes";
-import menuHandle from "@/services/handlePath";
-import { addCheckboxEventListener } from "@/services/handlePath";
-
+import { menuHandle ,viewInfoHandle, addCheckboxEventListener } from "@/services/eventHandlers";
 class Router {
    constructor(view) {
       this.view = view;
@@ -17,9 +15,16 @@ class Router {
 
    async handleHashChange() {
       const path = this.parseRequestURL();
-      await this.navigate(path);
-   }
 
+      const cleanPath = this.removeUserIdFromPath(path);
+
+      if (cleanPath !== path) {
+         window.history.replaceState({}, '', cleanPath);
+         await this.navigate(cleanPath);
+      } else {
+         await this.navigate(path);
+      }
+   }
    parseRequestURL() {
       return window.location.pathname.toLowerCase();
    }
@@ -37,19 +42,24 @@ class Router {
           console.error("Error when rendering:", error);
           document.getElementById('root').innerHTML = '<h3>Error when rendering</h3>';
         }
+
       } else {
-        const newPath = this.removeUserIdFromPath(path);
-        if (newPath !== path) {
-          window.history.replaceState({}, '', newPath);
-          await this.navigate(newPath);
-        } else {
-          document.getElementById('root').innerHTML = '<h3>Not Found</h3>';
-        }
+
+         const newPath = this.removeUserIdFromPath(path);
+         if (newPath !== path) {
+            window.history.replaceState({}, '', newPath);
+            await this.navigate(newPath);
+         } else {
+            document.getElementById('root').innerHTML = '<h3>Not Found</h3>';
+         }
+
       }
 
       menuHandle();
       addCheckboxEventListener();
+      viewInfoHandle();
     }
+
 
 
    matchRoute(route, path) {

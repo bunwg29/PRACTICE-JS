@@ -1,9 +1,9 @@
 
 const contentInTable = user => {
   return `
-      <div class = "list">
-         <a class = "checkbox" href="#/${user.id}"><img src="../assets/icons/userNonCheckbox.svg" alt="checkbox">
-         <a class = "showinfo" href=""><img src="../assets/icons/showProfile.svg" alt="show-profile"></a>
+      <div class = "list" data-user-id="${user.id}">
+         <a class = "checkbox"><img src="../assets/icons/userNonCheckbox.svg" alt="checkbox">
+         <a class = "showinfo"><img src="../assets/icons/showProfile.svg" alt="show-profile"></a>
 
          <div class = "info-name">
             <div class = "info-name__firstname">

@@ -48,7 +48,6 @@ export default class View {
 
       try {
          this.filterView = new FilterView(this.userController);
-         
          const users = await fetchFunction();
 
          this.currentUsers = users || [];

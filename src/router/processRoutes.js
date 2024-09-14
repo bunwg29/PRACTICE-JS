@@ -1,45 +1,92 @@
-
 import routes from "./routes";
+import menuHandle from "@/services/handlePath";
+import { addCheckboxEventListener } from "@/services/handlePath";
 
-const parseRequestURL = () => {
-   let url = location.hash.slice(1).toLowerCase() || '/';
-   return url;
-};
-
-const router = async (view) => {
-
-  const path = parseRequestURL();
-  let found = Object.keys(routes).find(route => route === path);
-
-  if (found) {
-      try {
-         document.getElementById('root').innerHTML = '';
-
-         const container = await routes[found].template(view);
-         document.getElementById('root').appendChild(container);
-
-      } catch (error) {
-
-         console.error("Error when render:", error);
-         document.getElementById('root').innerHTML = '<h3>Error when render</h3>';
-
-      }
-   }  else {
-
-      document.getElementById('root').innerHTML = '<h3>Not Found</h3>';
-
+class Router {
+   constructor(view) {
+      this.view = view;
+      this.routes = routes;
+      this.handleHashChange = this.handleHashChange.bind(this);
+      this.init();
    }
-};
 
-export default function processRoutes(view) {
+   init() {
+      window.addEventListener('hashchange', this.handleHashChange);
+      window.addEventListener('load', this.handleHashChange);
+   }
 
-  window.addEventListener('hashchange', () => {
-    router(view);
-  });
+   async handleHashChange() {
+      const path = this.parseRequestURL();
+      await this.navigate(path);
+   }
 
-  window.addEventListener('load', () => {
-    router(view);
-  });
+   parseRequestURL() {
+      return window.location.pathname.toLowerCase();
+   }
 
+   async navigate(path) {
+      const found = Object.keys(this.routes).find(route => this.matchRoute(route, path));
+
+      if (found) {
+        const params = this.extractParams(found, path);
+
+        try {
+          document.getElementById('root').innerHTML = '';
+          const container = await this.routes[found].template(this.view);
+          document.getElementById('root').appendChild(container);
+        } catch (error) {
+          console.error("Error when rendering:", error);
+          document.getElementById('root').innerHTML = '<h3>Error when rendering</h3>';
+        }
+      } else {
+        const newPath = this.removeUserIdFromPath(path);
+        if (newPath !== path) {
+          window.history.replaceState({}, '', newPath);
+          await this.navigate(newPath);
+        } else {
+          document.getElementById('root').innerHTML = '<h3>Not Found</h3>';
+        }
+      }
+
+      menuHandle();
+      addCheckboxEventListener();
+    }
+
+
+   matchRoute(route, path) {
+      const routeParts = route.split('/');
+      const pathParts = path.split('/');
+      if (routeParts.length !== pathParts.length) return false;
+
+      return routeParts.every((part, i) => part.startsWith(':') || part === pathParts[i]);
+   }
+
+   extractParams(route, path) {
+      const routeParts = route.split('/');
+      const pathParts = path.split('/');
+      const params = {};
+
+      routeParts.forEach((part, i) => {
+         if (part.startsWith('')) {
+            const paramName = part.slice(1);
+            params[paramName] = pathParts[i];
+         }
+      });
+
+      return params;
+   }
+
+   removeUserIdFromPath(path) {
+      const pathParts = path.split('/');
+
+      if (pathParts.length > 1 && /\d+/.test(pathParts[pathParts.length - 1])) {
+         pathParts.pop();
+      }
+
+      return pathParts.join('/') || '/';
+   }
 }
 
+export default function processRoutes(view) {
+  new Router(view);
+}

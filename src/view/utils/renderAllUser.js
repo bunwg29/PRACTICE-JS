@@ -1,4 +1,4 @@
-
+import viewMore from "../components/viewmoreOption";
 const contentInTable = user => {
 
    const activityHistory = Array.isArray(user.activity) ? user.activity.map(activity => `
@@ -47,8 +47,14 @@ const contentInTable = user => {
                ${user.amount}
                <p>USD</p>
             </div>
+
             <button class="button-viewmore">View More</button>
-            <a class="viewmore"><img src="../assets/icons/viewMoreOption.svg" alt="show-profile"></a>
+
+            <div class = "addition">
+               <a class="viewmore"><img src="../assets/icons/viewMoreOption.svg" alt="show-profile"></a>
+               ${viewMore()}
+            </div>
+
          </div>
 
 
@@ -60,6 +66,9 @@ const contentInTable = user => {
              </div>
              ${activityHistory}
           </div>
+
+
+
        </div>
    `;
  };

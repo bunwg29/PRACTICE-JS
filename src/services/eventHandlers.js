@@ -65,7 +65,7 @@ const removeUserIdFromPath = (path, userId) => {
 };
 
 export const viewInfoHandle = () => {
-   document.querySelectorAll('.list-user .showinfo, .list-user .button-viewmore').forEach((element) => {
+   document.querySelectorAll('.list-user .showinfo, .list-user .button-viewmore, .addition-option .addition-option-viewProfile').forEach((element) => {
       element.addEventListener('click', function (event) {
           const infoElement = event.target.closest('.info');
           const activityElement = infoElement.nextElementSibling;

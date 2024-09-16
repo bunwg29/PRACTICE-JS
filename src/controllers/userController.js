@@ -56,7 +56,7 @@ export default class UserController {
       result = this.model.sortUser(result);
       return result;
    }
-   
+
    async updateView() {
       const filteredAndSortedUsers = this.applyFiltersAndSort();
       const domElement = document.querySelector('.user');

@@ -1,0 +1,52 @@
+@use "../abtracts/" as *;
+
+.addition-option.hidden {
+   display: none;
+}
+
+.addition-option {
+   position: absolute;
+   padding: 10px;
+   top: 25px;
+   left: -9em;
+   width: 8em;
+   z-index: 100;
+   background-color: $bgcl-item-profile;
+   @include flexStyle (space-around, none, column);
+   gap: 5px;
+   border-radius: 10px;
+   box-shadow: 0px 0px 5px 2px $bs-menu;
+
+   button {
+      padding: 5px;
+      @include flexStyle (none, left, row);
+      @include font-decription();
+      border: none;
+      border-radius: 5px;
+      background-color: transparent;
+   }
+
+   button:hover {
+      background-color: $bgcl-inactiveStatus;
+   }
+
+   .addition-option-edit  .addition-option-viewProfile {
+      color: $tcl-second;
+   }
+
+   .addition-option-activeUser {
+      color: $tcl-paid-status;
+   }
+
+   .addition-option-deleteUser {
+      color: $tcl-overdue-status;
+   }
+
+   hr {
+      border: none;
+      height: 1px;
+      width: 100%;
+      background-color: $bgcl-inactiveStatus;
+   };
+
+}

@@ -9,13 +9,14 @@ export default class View {
    constructor() {
       this.userController = null;
       this.currentUsers = [];
-      this.additionOption = new AdditionOption();
+      this.additionOption = null;
       this.filterView = null;
     }
 
     setUserController(userController) {
       this.userController = userController;
       this.filterView = new FilterView(this.userController, this);
+      this.additionOption = new AdditionOption(this.userController);
     }
 
    static createMainElement() {

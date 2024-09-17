@@ -3,17 +3,21 @@ import menuTable from './components/menuTable';
 import menuTitle from './components/menuTitle';
 import renderAllUser from './utils/renderAllUser';
 import FilterView from './utils/filterView';
-
+import AdditionOption from './utils/addtionOption';
 export default class View {
 
    constructor() {
       this.userController = null;
       this.currentUsers = [];
+      this.additionOption = null;
+      this.filterView = null;
     }
 
-   setUserController(userController) {
+    setUserController(userController) {
       this.userController = userController;
-   }
+      this.filterView = new FilterView(this.userController, this);
+      this.additionOption = new AdditionOption(this.userController);
+    }
 
    static createMainElement() {
       const main = document.createElement('main');
@@ -35,6 +39,26 @@ export default class View {
       }
    }
 
+   applyViewMoreListeners() {
+      const viewMoreButtons = document.querySelectorAll('.viewmore');
+      viewMoreButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const additionElement = event.target.closest('.addition');
+          if (additionElement) {
+            this.additionOption.displayOption(additionElement);
+          }
+        });
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('.addition') && this.additionOption.currentOpenForm) {
+          this.additionOption.currentOpenForm.classList.add('hidden');
+          this.additionOption.currentOpenForm = null;
+        }
+      });
+   }
+
    async renderUserType(fetchFunction) {
       const container = document.createElement('div');
       container.className = 'container';
@@ -47,7 +71,7 @@ export default class View {
       container.appendChild(main);
 
       try {
-         this.filterView = new FilterView(this.userController);
+         this.filterView = new FilterView(this.userController, this);
          const users = await fetchFunction();
 
          this.currentUsers = users || [];
@@ -61,6 +85,24 @@ export default class View {
                this.filterView.displayFilter();
             });
          }
+
+         const viewMoreButtons = container.querySelectorAll('.viewmore');
+         viewMoreButtons.forEach(button => {
+         button.addEventListener('click', (event) => {
+            const additionElement = event.target.closest('.addition');
+               if (additionElement) {
+                  this.additionOption.displayOption(additionElement);
+               }
+            });
+         });
+
+         document.addEventListener('click', (event) => {
+            if (!event.target.closest('.addition') && this.additionOption.currentOpenForm) {
+               this.additionOption.currentOpenForm.classList.add('hidden');
+               this.additionOption.currentOpenForm = null;
+            }
+         });
+
       } catch (error) {
          console.error('Error: ', error);
          this.currentUsers = [];

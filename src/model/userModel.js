@@ -19,7 +19,7 @@ export default class UserModel {
          console.log("Error when get fetch", error);
       }
    }
-z
+
    async fetchPaidUser() {
       try {
          this.users = await getPaidUser();
@@ -68,5 +68,16 @@ z
       } else {
          return users.filter(user => user.active_status === this.userFilter);
       }
+   }
+
+   updateUserStatus(updatedUser) {
+      const index = this.users.findIndex(user => user.id === updatedUser.id);
+      if (index !== -1) {
+         this.users[index] = updatedUser;
+      }
+   }
+
+   removeUser(userId) {
+      this.users = this.users.filter(user => user.id !== parseInt(userId));
    }
 }

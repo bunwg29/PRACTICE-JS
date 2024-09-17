@@ -1,32 +1,91 @@
 @use "../base" as *;
 
 .user {
-   .list {
-      padding: 10px 0px;
-      @include flexStyle (none, center, row);
+   .list-user {
+      .info {
+         padding: 10px 0px;
+         @include flexStyle (none, center, row);
 
-      .checkbox {
-         flex: 0.06;
+         .checkbox {
+            flex: 0.06;
+         }
+         .showinfo {
+            flex: 0.06;
+         }
+         .info-name {
+            @include flexStyle (center, left, column);
+            gap: 5px;
+            flex: 0.25;
+         }
+         .info-active {
+            flex: 0.46;
+         }
+         .info-payment {
+            flex: 0.33;
+         }
+         .info-amount {
+            flex: 0.06;
+         }
+         .button-viewmore{
+            flex: 0.08;
+         }
       }
-      .showinfo {
-         flex: 0.06;
-      }
-      .info-name {
-         @include flexStyle (center, left, column);
-         gap: 5px;
-         flex: 0.25;
-      }
-      .info-active {
-         flex: 0.46;
-      }
-      .info-payment {
-         flex: 0.33;
-      }
-      .info-amount {
-         flex: 0.06;
-      }
-      .button-viewmore{
-         flex: 0.08;
+
+      .addition {
+         position: relative;
       }
    }
+
+   .activity {
+      display: none;
+      background-color: #fff;
+      border-radius: 0 0 8px 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+      &-header {
+         display: grid;
+         grid-template-columns: 100px 1fr 2fr;
+         padding: 15px;
+         background-color: #f8f8f8;
+         border-bottom: 1px solid #e0e0e0;
+         font-weight: bold;
+         color: #666;
+         font-size: 0.9em;
+       }
+
+
+
+       &-header div:last-child {
+         display: flex;
+         align-items: center;
+       }
+
+       &-header div:last-child::after {
+         content: 'i';
+         display: inline-block;
+         width: 16px;
+         height: 16px;
+         background-color: #ccc;
+         border-radius: 50%;
+         text-align: center;
+         line-height: 16px;
+         font-size: 12px;
+         color: white;
+         margin-left: 5px;
+       }
+
+       &-info {
+         display: grid;
+         grid-template-columns: 100px 1fr 2fr;
+         padding: 15px;
+         border-bottom: 1px solid #e0e0e0;
+         font-size: 0.9em;
+       }
+
+    }
+
+
+
+
 }

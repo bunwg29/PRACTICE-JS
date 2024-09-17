@@ -21,7 +21,6 @@ export default class FilterView {
             this.userController.handleSortChange(radio.value);
             addCheckboxEventListener();
             viewInfoHandle();
-            this.view.applyViewMoreListeners();
          });
       });
 
@@ -31,7 +30,6 @@ export default class FilterView {
             this.userController.handleUserChange(radio.value);
             addCheckboxEventListener();
             viewInfoHandle();
-            this.view.applyViewMoreListeners();
          });
       });
    }

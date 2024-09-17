@@ -327,7 +327,6 @@
         }
       ]
     },
-
     {
       "id": 15,
       "firstname": "Son",
@@ -423,7 +422,7 @@
       "firstname": "Romelu",
       "lastname": "Lukaku",
       "email": "lukaku@example.com",
-      "active_status": "Inactive",
+      "active_status": "Active",
       "last_login": "2024-08-17",
       "paid_status": "Unpaid",
       "paid_day": "2024-09-01",

@@ -78,9 +78,8 @@ export default class UserController {
          const response = await axios.delete(`/${userId}`);
 
          if (response.status === 200) {
-            // Xóa người dùng khỏi danh sách trong model
             this.model.removeUser(userId);
-            await this.updateView(); // Cập nhật lại giao diện sau khi xóa
+            await this.updateView();
          }
       } catch (error) {
          console.error('Error deleting user:', error);

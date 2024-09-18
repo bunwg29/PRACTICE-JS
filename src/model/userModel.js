@@ -10,6 +10,7 @@ export default class UserModel {
      this.users = [];
      this.sortBy = 'default';
      this.userFilter = 'all';
+     this.searchQuery = '';
    }
 
    async fetchAllUser() {
@@ -80,4 +81,18 @@ export default class UserModel {
    removeUser(userId) {
       this.users = this.users.filter(user => user.id !== parseInt(userId));
    }
+
+   searchUsers(users) {
+      const query = this.searchQuery;
+      if (!query) return users;
+
+      return users.filter(user => {
+          const fullName = `${user.firstname} ${user.lastname}`.toLowerCase();
+          return (
+              fullName.includes(query) ||
+              user.email.toLowerCase().includes(query) ||
+              (user.paid_day && user.paid_day.includes(query))
+          );
+      });
+  }
 }

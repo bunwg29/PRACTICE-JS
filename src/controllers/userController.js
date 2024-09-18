@@ -49,9 +49,20 @@ export default class UserController {
       await this.updateView();
    }
 
+   async handleSearch(query) {
+      if (!this.view) {
+          console.error('View is not set in UserController');
+          return;
+      }
+
+      this.model.searchQuery = query;
+      await this.updateView();
+  }
+
    applyFiltersAndSort() {
       let result = [...this.model.users];
       result = this.model.filterUser(result);
+      result = this.model.searchUsers(result);
       result = this.model.sortUser(result);
       return result;
    }

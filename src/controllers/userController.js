@@ -1,5 +1,4 @@
 import UserModel from "../model/userModel";
-import renderAllUser from "../view/utils/renderAllUser";
 import axios from "@/services/getData";
 export default class UserController {
    constructor() {
@@ -87,11 +86,18 @@ export default class UserController {
    }
 
    async updateView() {
-      const filteredAndSortedUsers = this.applyFiltersAndSort();
-      const domElement = document.querySelector('.user');
-      if (domElement) {
-         domElement.innerHTML = renderAllUser.renderUsers(filteredAndSortedUsers);
-         this.view.applyViewMoreListeners();
+
+      if (!this.view) {
+          console.error('View is not set in UserController');
+          return;
       }
+
+      this.view.currentUsers = this.applyFiltersAndSort();
+
+      this.view.pagination.totalItems = this.view.currentUsers.length;
+      this.view.pagination.totalPages = Math.ceil(this.view.pagination.totalItems / this.view.pagination.itemsPerPage);
+
+      await this.view.renderPaginatedContent();
+
    }
 }

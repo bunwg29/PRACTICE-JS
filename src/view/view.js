@@ -5,7 +5,7 @@ import renderAllUser from './utils/RenderUser';
 import FilterView from './utils/filterView';
 import AdditionOption from './utils/AdditionOption';
 import footer from './layouts/footer';
-import Pagination from './utils/pagination';
+import Pagination from './utils/Pagination';
 import { viewInfoHandle, addCheckboxEventListener } from '@/services/eventHandlers';
 
 export default class View {

@@ -48,7 +48,7 @@ export default class AdditionOption {
          deleteButton.addEventListener('click', () => {
             const userId = element.closest('.info').dataset.userId;
             if (userId && this.userController) {
-               this.userController.deleteUser(userId); // Gọi hàm deleteUser trong UserController
+               this.userController.deleteUser(userId);
             }
          });
       }

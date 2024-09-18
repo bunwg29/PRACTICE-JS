@@ -1,25 +1,30 @@
 import header from './layouts/header';
 import menuTable from './components/menuTable';
 import menuTitle from './components/menuTitle';
-import renderAllUser from './utils/renderAllUser';
+import renderAllUser from './utils/RenderUser';
 import FilterView from './utils/filterView';
-import AdditionOption from './utils/addtionOption';
-export default class View {
+import AdditionOption from './utils/AdditionOption';
+import footer from './layouts/footer';
+import Pagination from './utils/pagination';
+import { viewInfoHandle, addCheckboxEventListener } from '@/services/eventHandlers';
 
+export default class View {
    constructor() {
       this.userController = null;
       this.currentUsers = [];
       this.additionOption = null;
       this.filterView = null;
-    }
+      this.pagination = null;
+      this.container = null;
+   }
 
-    setUserController(userController) {
+   setUserController(userController) {
       this.userController = userController;
       this.filterView = new FilterView(this.userController, this);
       this.additionOption = new AdditionOption(this.userController);
-    }
+   }
 
-   static createMainElement() {
+   createMainElement() {
       const main = document.createElement('main');
       main.className = 'main';
       main.innerHTML += menuTable();
@@ -27,20 +32,18 @@ export default class View {
       return main;
    }
 
-   static async renderContent(users, usersElement, main) {
+   async renderContent(users, usersElement) {
       try {
          const userHTML = renderAllUser.renderUsers(users);
          usersElement.innerHTML = userHTML;
-         main.appendChild(usersElement);
       } catch (error) {
          console.error('Error when render user:', error);
          usersElement.innerHTML = 'Not found';
-         main.appendChild(usersElement);
       }
    }
 
    applyViewMoreListeners() {
-      const viewMoreButtons = document.querySelectorAll('.viewmore');
+      const viewMoreButtons = this.container.querySelectorAll('.viewmore');
       viewMoreButtons.forEach(button => {
         button.addEventListener('click', (event) => {
           event.stopPropagation();
@@ -59,56 +62,106 @@ export default class View {
       });
    }
 
-   async renderUserType(fetchFunction) {
-      const container = document.createElement('div');
-      container.className = 'container';
+   updatePagination() {
+      const currentRange = this.container.querySelector('.current-range');
+      const totalItems = this.container.querySelector('.total-items');
+      const prevButton = this.container.querySelector('.prev-page');
+      const nextButton = this.container.querySelector('.next-page');
 
-      const main = View.createMainElement();
-      const usersElement = document.createElement('div');
+      if (currentRange && totalItems && prevButton && nextButton) {
+         const pageInfo = this.pagination.getPageInfo();
+         currentRange.textContent = pageInfo.currentRange;
+         totalItems.textContent = pageInfo.totalItems;
+
+         prevButton.disabled = pageInfo.currentPage === 1;
+         nextButton.disabled = pageInfo.currentPage === pageInfo.totalPages;
+      }
+   }
+
+   async renderPaginatedContent() {
+      const main = this.container.querySelector('.main');
+      if (!main) return;
+
+      const usersElement = main.querySelector('.user') || document.createElement('div');
       usersElement.className = 'user';
 
-      container.innerHTML += header();
-      container.appendChild(main);
+      const filteredAndSortedUsers = this.userController.applyFiltersAndSort();
+
+      this.currentUsers = filteredAndSortedUsers;
+
+      const paginatedUsers = this.pagination.getCurrentPageItems(this.currentUsers);
+      await this.renderContent(paginatedUsers, usersElement);
+
+      if (!main.contains(usersElement)) {
+          main.appendChild(usersElement);
+      }
+
+      this.updatePagination();
+      this.applyViewMoreListeners();
+      viewInfoHandle();
+      addCheckboxEventListener();
+  }
+
+   setupEventListeners() {
+      const filterButton = this.container.querySelector('.menu-left-filter');
+      if (filterButton) {
+         filterButton.addEventListener('click', () => {
+            this.filterView.displayFilter();
+         });
+      }
+
+      const itemsPerPageSelect = this.container.querySelector('.items-per-page');
+      if (itemsPerPageSelect) {
+         itemsPerPageSelect.addEventListener('change', (event) => {
+            const newItemsPerPage = parseInt(event.target.value, 10);
+            this.pagination.setItemsPerPage(newItemsPerPage);
+            this.renderPaginatedContent();
+         });
+      }
+
+      const prevButton = this.container.querySelector('.prev-page');
+      if (prevButton) {
+         prevButton.addEventListener('click', () => {
+            this.pagination.prevPage();
+            this.renderPaginatedContent();
+         });
+      }
+
+      const nextButton = this.container.querySelector('.next-page');
+      if (nextButton) {
+         nextButton.addEventListener('click', () => {
+            this.pagination.nextPage();
+            this.renderPaginatedContent();
+         });
+      }
+   }
+
+   async renderUserType(fetchFunction) {
+      this.container = document.createElement('div');
+      this.container.className = 'container';
+
+      const main = this.createMainElement();
+      this.container.innerHTML = header();
+      this.container.appendChild(main);
 
       try {
          this.filterView = new FilterView(this.userController, this);
          const users = await fetchFunction();
 
          this.currentUsers = users || [];
+         this.pagination = new Pagination(10, this.currentUsers.length);
 
-         await View.renderContent(users, usersElement, main);
+         this.container.innerHTML += footer();
 
-         const filterButton = container.querySelector('.menu-left-filter');
-
-         if (filterButton) {
-            filterButton.addEventListener('click', () => {
-               this.filterView.displayFilter();
-            });
-         }
-
-         const viewMoreButtons = container.querySelectorAll('.viewmore');
-         viewMoreButtons.forEach(button => {
-         button.addEventListener('click', (event) => {
-            const additionElement = event.target.closest('.addition');
-               if (additionElement) {
-                  this.additionOption.displayOption(additionElement);
-               }
-            });
-         });
-
-         document.addEventListener('click', (event) => {
-            if (!event.target.closest('.addition') && this.additionOption.currentOpenForm) {
-               this.additionOption.currentOpenForm.classList.add('hidden');
-               this.additionOption.currentOpenForm = null;
-            }
-         });
+         await this.renderPaginatedContent();
+         this.setupEventListeners();
 
       } catch (error) {
          console.error('Error: ', error);
          this.currentUsers = [];
       }
 
-      return container;
+      return this.container;
    }
 
    async Dashboard() {
@@ -126,5 +179,4 @@ export default class View {
    async OverdueContent() {
       return this.renderUserType(this.userController.fetchOverdueUsers.bind(this.userController));
    }
-
 }

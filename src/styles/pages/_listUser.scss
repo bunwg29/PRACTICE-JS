@@ -2,6 +2,10 @@
 
 .user {
    .list-user {
+      border-top: solid 1px;
+      border-color: $bd-user;
+      padding: 0px 10px;
+      transition: background-color 0.3s;
       .info {
          padding: 10px 0px;
          @include flexStyle (none, center, row);
@@ -16,24 +20,125 @@
             @include flexStyle (center, left, column);
             gap: 5px;
             flex: 0.25;
+
+            &__firstname {
+               @include font($primary-font, $fs-medium, $fw-second);
+               color: $tcl-second;
+            }
+
+            &__email {
+               @include font($primary-font, $fs-medium, $fw-first);
+               color: $tcl-first;
+            }
          }
-         .info-active {
+         .info-activity {
             flex: 0.46;
+            &__active {
+               @include flexStyle (left, center, row);
+               gap: 3px;
+               width: 15%;
+               background-color: $bgcl-activeStatus;
+               padding: 2px;
+               border-radius: 10px;
+               @include font-status();
+               color: $tcl-active-status;
+            }
+
+
+            &__inactive {
+               @include flexStyle (left, center, row);
+               gap: 3px;
+               width: 15%;
+               background-color: $bgcl-activeStatus;
+               padding: 2px;
+               border-radius: 10px;
+               @include font-status();
+               color: $tcl-first;
+            }
+
+            .status-dot {
+               @include flexStyle (none, center, column);
+               font-size: 15px;
+            }
+
+            &__login {
+               p {
+                  @include font-status();
+                  color: $tcl-first;
+               }
+            }
          }
          .info-payment {
             flex: 0.33;
+
+            &__paid {
+               @include flexStyle (left, center, row);
+               gap: 3px;
+               width: 15%;
+               background-color: $bgcl-paidStatus;
+               padding: 2px;
+               border-radius: 10px;
+               @include font-status();
+               color: $tcl-paid-status;
+            }
+
+            &__unpaid {
+               @include flexStyle (left, center, row);
+               gap: 3px;
+               width: 20%;
+               background-color: $bgcl-unpaidStatus;
+               padding: 2px;
+               border-radius: 10px;
+               @include font-status();
+               color: $tcl-unpaid-status;
+            }
+
+            &__overdue {
+               @include flexStyle (left, center, row);
+               gap: 3px;
+               width: 23%;
+               background-color: $bgcl-overdueStatus;
+               padding: 2px;
+               border-radius: 10px;
+               @include font-status();
+               color: $tcl-overdue-status;
+            }
+
+            .status-dot {
+               @include flexStyle (none, center, column);
+               font-size: 15px;
+            }
+
+            &__day {
+               @include font-status();
+               color: $tcl-second;
+            }
          }
          .info-amount {
             flex: 0.06;
+            &__money {
+               @include font ($primary-font, $fs-medium, $fw-second);
+            }
+            p {
+               @include font($primary-font, $fs-medium, $fw-first);
+               color: $tcl-first;
+            }
          }
          .button-viewmore{
             flex: 0.08;
+            color: $tcl-first;
+            border: none;
+            background-color: transparent;
          }
       }
 
       .addition {
          position: relative;
       }
+   }
+
+   .list-user:hover {
+      background-color: $bgcl-main;
    }
 
    .activity {
@@ -47,45 +152,50 @@
          display: grid;
          grid-template-columns: 100px 1fr 2fr;
          padding: 15px;
-         background-color: #f8f8f8;
-         border-bottom: 1px solid #e0e0e0;
-         font-weight: bold;
-         color: #666;
+         background-color: $bgcl-inactiveStatus;
+         color: $tcl-first;
          font-size: 0.9em;
-       }
+         @include font ($primary-font, $fs-small, $fw-button);
+      }
 
 
 
-       &-header div:last-child {
+      &-header div:last-child {
          display: flex;
          align-items: center;
-       }
+      }
 
-       &-header div:last-child::after {
-         content: 'i';
-         display: inline-block;
-         width: 16px;
-         height: 16px;
-         background-color: #ccc;
-         border-radius: 50%;
-         text-align: center;
-         line-height: 16px;
-         font-size: 12px;
-         color: white;
-         margin-left: 5px;
-       }
+      &-header div:last-child::after {
+      content: 'i';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      background-color: #ccc;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 16px;
+      font-size: 12px;
+      color: white;
+      margin-left: 5px;
+      }
 
-       &-info {
+      &-info {
          display: grid;
          grid-template-columns: 100px 1fr 2fr;
          padding: 15px;
-         border-bottom: 1px solid #e0e0e0;
+         border-bottom: 1px solid $bd-user;
          font-size: 0.9em;
-       }
+         background-color: $bgcl-main;
+         .activity-date {
+            @include font-status();
+            color: $tcl-first;
+         }
+
+         .activity-description .activity-detail {
+            @include font-decription();
+            color: $tcl-second;
+         }
+      }
 
     }
-
-
-
-
 }

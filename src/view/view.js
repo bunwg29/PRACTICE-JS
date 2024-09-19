@@ -102,6 +102,8 @@ export default class View {
       addCheckboxEventListener();
    }
 
+
+
    setupEventListeners() {
       const filterButton = this.container.querySelector('.menu-left-filter');
       if (filterButton) {
@@ -142,21 +144,54 @@ export default class View {
                this.userController.handleSearch(query);
             });
          }
+         document.addEventListener('click', async (event) => {
+            if (event.target.classList.contains('menu-pay')) {
+               console.log("Pay button clicked");
+               const userId = this.getCurrentUserId();
+               console.log("Retrieved user ID:", userId);
+               if (userId) {
+                  const success = await this.userController.updatePaymentStatus(userId);
+                  if (success) {
+                     console.log("Payment status updated successfully");
+                     window.location.reload();
+                  } else {
+                     alert('Failed to update payment status. User may already be paid or not found.');
+                  }
+               } else {
+                  console.error("Could not determine user ID");
+                  alert('Could not determine user ID. Please make sure you are on a valid user page.');
+               }
+            }
+         });
    }
 
-
+   getCurrentUserId() {
+      const path = window.location.pathname;
+      // Tìm kiếm bất kỳ số nào ở cuối URL
+      const match = path.match(/(\d+)$/);
+      if (match) {
+         console.log("Found user ID:", match[1]);
+         return parseInt(match[1]);
+      }
+      console.log("Could not find user ID in path:", path);
+      return null;
+   }
 
    async renderUserType(fetchFunction) {
       this.container = document.createElement('div');
       this.container.className = 'container';
 
+      const headerElement = header.create();
+      await header.updateTotalAmount(headerElement, this.userController);
+      this.container.appendChild(headerElement);
+
       const main = this.createMainElement();
-      this.container.innerHTML = header();
       this.container.appendChild(main);
 
       try {
          this.filterView = new FilterView(this.userController, this);
          const users = await fetchFunction();
+
 
          this.currentUsers = users || [];
          this.pagination = new Pagination(10, this.currentUsers.length);
@@ -165,6 +200,8 @@ export default class View {
 
          await this.renderPaginatedContent();
          this.setupEventListeners();
+
+
 
       } catch (error) {
          console.error('Error: ', error);

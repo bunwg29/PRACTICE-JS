@@ -100,7 +100,7 @@ export default class View {
       this.applyViewMoreListeners();
       viewInfoHandle();
       addCheckboxEventListener();
-  }
+   }
 
    setupEventListeners() {
       const filterButton = this.container.querySelector('.menu-left-filter');
@@ -134,7 +134,17 @@ export default class View {
             this.renderPaginatedContent();
          });
       }
+
+      const searchInput = this.container.querySelector('.menu-left-search input');
+         if (searchInput) {
+            searchInput.addEventListener('input', (event) => {
+               const query = event.target.value.trim().toLowerCase();
+               this.userController.handleSearch(query);
+            });
+         }
    }
+
+
 
    async renderUserType(fetchFunction) {
       this.container = document.createElement('div');

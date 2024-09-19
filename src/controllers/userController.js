@@ -59,6 +59,12 @@ export default class UserController {
       await this.updateView();
   }
 
+
+   async getTotalPaidAmount() {
+      await this.model.fetchAllUser();
+      return this.model.calculateTotalPaidAmount();
+   }
+
    applyFiltersAndSort() {
       let result = [...this.model.users];
       result = this.model.filterUser(result);
@@ -110,5 +116,23 @@ export default class UserController {
 
       await this.view.renderPaginatedContent();
 
+   }
+
+   async updatePaymentStatus(userId) {
+      try {
+         const user = await this.model.getUserById(userId);
+         if (user && (user.paid_status === "Unpaid" || user.paid_status === "Overdue")) {
+            user.paid_status = "Paid";
+            user.paid_day = new Date().toISOString().split('T')[0];
+            await this.model.updateUser(user);
+            // Cập nhật lại dữ liệu local
+            await this.fetchAllUsers();
+            return true;
+         }
+         return false;
+      } catch (error) {
+         console.error("Error updating payment status:", error);
+         return false;
+      }
    }
 }

@@ -12,12 +12,13 @@ body {
 
    .container {
       width: 100%;
+      padding: 5% 0;
       @include flexStyle (none, none, column);
       gap: 1em;
 
       main {
          width: 100%;
-         padding: 20px 20px;
+         // padding: 20px 20px;
          background-color: $bgcl-item-profile;
          border-radius: 10px;
          box-shadow: 2px 2px 5px 0px $bs-menu;

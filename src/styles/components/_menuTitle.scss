@@ -2,7 +2,8 @@
 
 .table-title {
    @include flexStyle (none, center, row);
-   padding: 10px 0;
+   padding: 10px 10px;
+   background-color: $bgcl-main;
    & > * {
       @include font($primary-font, $fs-small, $fw-button);
       color: $tcl-first;

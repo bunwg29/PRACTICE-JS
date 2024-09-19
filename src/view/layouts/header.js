@@ -11,7 +11,7 @@ const createHeader = () => {
                <a href="" class="nav-option-4">Overdue</a>
             </ul>
          </div>
-         <p class="nav-total-amount">Total payable amount: <span id="total-amount">$0.00 USD</span></p>
+         <p class="nav-total-amount">Total payable amount: <span id="total-amount">0.00</span> USD</p>
       </nav>
    `;
    return headerElement;
@@ -22,7 +22,7 @@ const updateTotalAmount = async (headerElement, userController) => {
       const totalMoney = await userController.getTotalPaidAmount();
       const totalAmountElement = headerElement.querySelector('#total-amount');
       if (totalAmountElement) {
-         totalAmountElement.textContent = `$${totalMoney.toFixed(2)} USD`;
+         totalAmountElement.textContent = `$${totalMoney.toFixed(2)}`;
          console.log('Total amount updated in DOM:', totalAmountElement.textContent);
       } else {
          console.error('Total amount element not found in the DOM');

@@ -7,6 +7,7 @@ import AdditionOption from './utils/AdditionOption';
 import footer from './layouts/footer';
 import Pagination from './utils/Pagination';
 import { viewInfoHandle, addCheckboxEventListener } from '@/services/eventHandlers';
+import AuthController from '@/controllers/AuthController';
 
 export default class View {
    constructor() {
@@ -16,7 +17,121 @@ export default class View {
       this.filterView = null;
       this.pagination = null;
       this.container = null;
+      this.authController = new AuthController();
+      this.authController.setView(this);
    }
+
+   async LoginForm() {
+      const container = document.createElement('div');
+      container.className = 'login-container';
+      container.innerHTML = `
+        <h2>Đăng nhập</h2>
+        <form id="login-form">
+          <input type="text" id="username" placeholder="Tên đăng nhập" required>
+          <input type="password" id="password" placeholder="Mật khẩu" required>
+          <button type="submit">Đăng nhập</button>
+        </form>
+        <p>Chưa có tài khoản? <a href="/register">Đăng ký</a></p>
+      `;
+
+      container.querySelector('#login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const success = await this.authController.login(username, password);
+        if (success) {
+          window.location.pathname = '/';
+        } else {
+          alert('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
+        }
+      });
+
+      return container;
+    }
+
+    async RegisterForm() {
+      const container = document.createElement('div');
+      container.className = 'register-container';
+      container.innerHTML = `
+        <h2>Đăng ký</h2>
+        <form id="register-form">
+          <input type="text" id="username" placeholder="Tên đăng nhập" required>
+          <input type="password" id="password" placeholder="Mật khẩu" required>
+          <input type="email" id="email" placeholder="Email" required>
+          <button type="submit">Đăng ký</button>
+        </form>
+        <p>Đã có tài khoản? <a href="/login">Đăng nhập</a></p>
+      `;
+
+      container.querySelector('#register-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const email = document.getElementById('email').value;
+        const success = await this.authController.register(username, password, email);
+        if (success) {
+          alert('Đăng ký thành công. Vui lòng đăng nhập.');
+          window.location.pathname = '/login';
+        } else {
+          alert('Đăng ký thất bại. Tên đăng nhập hoặc email đã tồn tại.');
+        }
+      });
+
+      return container;
+    }
+
+    async renderAuth() {
+      this.container = document.createElement('div');
+      this.container.className = 'auth-container';
+      this.container.innerHTML = this.renderLoginForm();
+
+      this.setupAuthEventListeners();
+
+      return this.container;
+    }
+
+    setupAuthEventListeners() {
+      this.container.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (event.target.id === 'login-form') {
+          const username = this.container.querySelector('#login-username').value;
+          const password = this.container.querySelector('#login-password').value;
+          const success = await this.authController.login(username, password);
+          if (success) {
+            window.location.hash = '#dashboard';
+          } else {
+            alert('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
+          }
+        } else if (event.target.id === 'register-form') {
+          const username = this.container.querySelector('#register-username').value;
+          const password = this.container.querySelector('#register-password').value;
+          const email = this.container.querySelector('#register-email').value;
+          const success = await this.authController.register(username, password, email);
+          if (success) {
+            alert('Đăng ký thành công. Vui lòng đăng nhập.');
+            this.container.innerHTML = this.renderLoginForm();
+          } else {
+            alert('Đăng ký thất bại. Tên đăng nhập hoặc email đã tồn tại.');
+          }
+        }
+      });
+
+      this.container.addEventListener('click', (event) => {
+        if (event.target.id === 'show-register') {
+          this.container.innerHTML = this.renderRegisterForm();
+        } else if (event.target.id === 'show-login') {
+          this.container.innerHTML = this.renderLoginForm();
+        }
+      });
+    }
+
+    async checkAuth() {
+      if (!this.authController.isLoggedIn()) {
+        window.location.hash = '#login';
+        return false;
+      }
+      return true;
+    }
 
    setUserController(userController) {
       this.userController = userController;
@@ -167,7 +282,6 @@ export default class View {
 
    getCurrentUserId() {
       const path = window.location.pathname;
-      // Tìm kiếm bất kỳ số nào ở cuối URL
       const match = path.match(/(\d+)$/);
       if (match) {
          console.log("Found user ID:", match[1]);
@@ -212,18 +326,26 @@ export default class View {
    }
 
    async Dashboard() {
-      return this.renderUserType(this.userController.fetchAllUsers.bind(this.userController));
+      if (await this.checkAuth()) {
+         return this.renderUserType(this.userController.fetchAllUsers.bind(this.userController));
+      }
    }
 
    async PaidContent() {
-      return this.renderUserType(this.userController.fetchPaidUsers.bind(this.userController));
+      if (await this.checkAuth()) {
+         return this.renderUserType(this.userController.fetchPaidUsers.bind(this.userController));
+      }
    }
 
    async UnpaidContent() {
-      return this.renderUserType(this.userController.fetchUnpaidUsers.bind(this.userController));
+      if (await this.checkAuth()) {
+         return this.renderUserType(this.userController.fetchUnpaidUsers.bind(this.userController));
+      }
    }
 
    async OverdueContent() {
-      return this.renderUserType(this.userController.fetchOverdueUsers.bind(this.userController));
+      if (await this.checkAuth()) {
+         return this.renderUserType(this.userController.fetchOverdueUsers.bind(this.userController));
+      }
    }
 }

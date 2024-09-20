@@ -831,5 +831,97 @@
         }
       ]
     }
+  ],
+  "auth_users": [
+    {
+      "id": 1,
+      "username": "bunbeo",
+      "password": "bun123456@",
+      "email": "bunbeo@gmail.com"
+    },
+    {
+      "id": 2,
+      "username": "brunofernandes",
+      "password": "assist2024",
+      "email": "brunomanu1@gmail.com"
+    },
+    {
+      "id": 3,
+      "username": "garnacho",
+      "password": "winger2005!",
+      "email": "garnachomanu@gmail.com"
+    },
+    {
+      "id": 4,
+      "username": "leomessi10",
+      "password": "goat1987",
+      "email": "leomessi10@gmail.com"
+    },
+    {
+      "id": 5,
+      "username": "neymarjr10",
+      "password": "brazil1992!",
+      "email": "neymarjr@gmail.com"
+    },
+    {
+      "id": 6,
+      "username": "kmbappe7",
+      "password": "france1998",
+      "email": "mbappe@gmail.com"
+    },
+    {
+      "id": 7,
+      "username": "kdb17",
+      "password": "belgium91!",
+      "email": "kdebruyne@gmail.com"
+    },
+    {
+      "id": 8,
+      "username": "haaland9",
+      "password": "norway2000!",
+      "email": "haaland@gmail.com"
+    },
+    {
+      "id": 9,
+      "username": "lewandowski9",
+      "password": "poland1988",
+      "email": "lewandowski@gmail.com"
+    },
+    {
+      "id": 10,
+      "username": "virgilvandijk4",
+      "password": "netherlands91!",
+      "email": "vandijk@gmail.com"
+    },
+    {
+      "id": 11,
+      "username": "mosalah11",
+      "password": "egypt1992!",
+      "email": "mosalah@gmail.com"
+    },
+    {
+      "id": 12,
+      "username": "kimmich6",
+      "password": "germany1995",
+      "email": "kimmich@gmail.com"
+    },
+    {
+      "id": 13,
+      "username": "harrykane",
+      "password": "england1993!",
+      "email": "harrykane@gmail.com"
+    },
+    {
+      "id": 14,
+      "username": "ngolokante7",
+      "password": "france1991",
+      "email": "kante@gmail.com"
+    },
+    {
+      "id": 15,
+      "username": "sonheungmin7",
+      "password": "korea1992!",
+      "email": "son@example.com"
+    }
   ]
 }

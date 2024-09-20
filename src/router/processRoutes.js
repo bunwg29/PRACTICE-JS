@@ -38,6 +38,12 @@ class Router {
           document.getElementById('root').innerHTML = '';
           const container = await this.routes[found].template(this.view);
           document.getElementById('root').appendChild(container);
+
+          if (found !== '/login' && found !== '/register') {
+            menuHandle();
+            addCheckboxEventListener();
+            viewInfoHandle();
+          }
         } catch (error) {
           console.error("Error when rendering:", error);
           document.getElementById('root').innerHTML = '<h3>Error when rendering</h3>';
@@ -54,10 +60,6 @@ class Router {
          }
 
       }
-
-      menuHandle();
-      addCheckboxEventListener();
-      viewInfoHandle();
     }
 
 
@@ -82,5 +84,7 @@ class Router {
 }
 
 export default function processRoutes(view) {
+
   new Router(view);
+  
 }

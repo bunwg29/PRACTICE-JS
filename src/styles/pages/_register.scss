@@ -1,0 +1,29 @@
+@use "../base/" as *;
+
+.register-container {
+   height: 90%;
+   width: 100%;
+   @include flexStyle (space-between, center, column);
+   gap: 10px;
+   padding: 10px;
+   form {
+      @include flexStyle (space-between, center, column);
+      gap: 10px;
+
+      input {
+         padding: 10px;
+         border: none;
+         border-radius: 10px;
+         height: 1.5em;
+         width: 20em;
+      }
+
+      button {
+         width: 10em;
+         height: 3em;
+         border-radius: 10px;
+         background-color: transparent;
+
+      }
+   }
+}

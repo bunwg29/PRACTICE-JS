@@ -1,4 +1,5 @@
 import { getAccount } from "../services/getAccountApi.js";
+import { authUsersApi } from "@/services/apiUserConfig.js";
 export default class AuthUserModel {
 
    constructor(id, username, password, email) {
@@ -8,6 +9,7 @@ export default class AuthUserModel {
      this.email = email;
    }
 
+   // Use for get all admin account
    static async getAllAuthUsers() {
       try {
          const userData = await getAccount();
@@ -17,4 +19,16 @@ export default class AuthUserModel {
          throw error;
       }
    }
+
+   // Use for add new admin account
+   static async addUser(newUser) {
+      try {
+        const response = await authUsersApi.post('', newUser);
+        return response.data;
+      } catch (error) {
+        console.error('Error adding new user:', error);
+        throw error;
+      }
+   }
+
 }

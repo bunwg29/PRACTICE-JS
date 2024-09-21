@@ -1,3 +1,5 @@
+// This file contains functions use for handle event with view interface
+
 export const menuHandle = () => {
    const navLinks = document.querySelectorAll('header nav a');
    const keywords = ['paid', 'unpaid', 'overdue', 'all'];

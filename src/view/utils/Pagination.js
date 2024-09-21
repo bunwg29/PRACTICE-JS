@@ -1,3 +1,4 @@
+// This function use for handle number of item in page, calculate total of pages to split.
 export default class Pagination {
 
    constructor(itemsPerPage, totalItems, currentPage = 1) {

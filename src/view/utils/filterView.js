@@ -1,3 +1,4 @@
+// This file use for display form of filter and connect with controller to get data and display corresponding data.
 export default class FilterView {
 
    constructor(userController, view) {

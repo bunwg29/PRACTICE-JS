@@ -5,16 +5,14 @@
 }
 
 .addition-option {
-   position: absolute;
-   padding: 10px;
-   top: 25px;
-   left: -9em;
-   width: 8em;
+   @include position (absolute, 25px, 0px, 0px, -8em);
+   @include size (8em, 10em);
+   padding: 5px;
    z-index: 100;
-   background-color: $bgcl-item-profile;
+   @include bg-color ($bgcl-item-profile);
    @include flexStyle (space-around, none, column);
    gap: 5px;
-   border-radius: 10px;
+   @include border-radius (10px);
    box-shadow: 0px 0px 5px 2px $bs-menu;
 
    button {

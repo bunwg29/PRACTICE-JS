@@ -1,3 +1,5 @@
+// This file use for render all main data of list.
+
 import viewMore from '../components/viewmoreOption';
 
 const contentInTable = user => {

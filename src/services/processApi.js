@@ -1,4 +1,6 @@
-import {getApi} from "./getData.js";
+// This function use for interact with data interface api
+
+import { getApi } from "./apiDataConfig";
 
 const urlAPI = "http://localhost:3000/user_data";
 

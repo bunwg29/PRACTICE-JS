@@ -4,7 +4,8 @@ import {
    getUnPaidUser,
    getOverdueUser,
 } from '../services/processApi.js';
-import axios from "@/services/getData";
+import axios from "../services/apiDataConfig.js";
+
 export default class UserModel {
    constructor() {
      this.users = [];
@@ -114,15 +115,15 @@ export default class UserModel {
 
     async updateUser(updatedUser) {
       try {
-         // Gọi API để cập nhật user trên server
          const response = await axios.put(`/${updatedUser.id}`, updatedUser);
          if (response.status === 200) {
-            // Cập nhật dữ liệu local
+
             const index = this.users.findIndex(user => user.id === updatedUser.id);
             if (index !== -1) {
                this.users[index] = updatedUser;
             }
             return true;
+
          }
          return false;
       } catch (error) {

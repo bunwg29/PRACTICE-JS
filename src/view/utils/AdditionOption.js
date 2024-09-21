@@ -1,3 +1,5 @@
+// This file handle event like click for addition option of interface
+
 export default class AdditionOption {
 
    constructor(userController) {

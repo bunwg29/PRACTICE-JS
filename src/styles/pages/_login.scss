@@ -1,29 +1,46 @@
 @use "../base/" as *;
 
 .login-container {
-   height: 90%;
-   width: 100%;
-   @include flexStyle (space-between, center, column);
-   gap: 10px;
-   padding: 10px;
-   form {
-      @include flexStyle (space-between, center, column);
-      gap: 10px;
+  @include size(100%, 90%);
+  @include flexStyle(space-between, center, column);
+  gap: 10px;
+  @include padding(10px);
 
-      input {
-         padding: 10px;
-         border: none;
-         border-radius: 10px;
-         height: 1.5em;
-         width: 20em;
+  h2 {
+    @include font-heading();
+  }
+
+  form {
+    @include flexStyle(space-between, center, column);
+    gap: 10px;
+
+    input {
+      @include padding(10px);
+      border: none;
+      @include border-radius(10px);
+      @include size(20em, 1.5em);
+      outline: none;
+
+      &:hover {
+        border: solid 1px;
       }
+    }
 
-      button {
-         width: 10em;
-         height: 3em;
-         border-radius: 10px;
-         background-color: transparent;
+    button {
+      @include size(10em, 3em);
+      @include border-radius(10px);
+      @include bg-color(transparent);
+      border-color: $bgcl-buttonPay;
+    }
+  }
 
-      }
-   }
+  p {
+    @include font-status();
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 5px;
 }

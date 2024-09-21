@@ -1,3 +1,5 @@
+// This is configuration of api admin account
+
 import axios from "axios";
 
 const urlAuthUsers = "http://localhost:3000/auth_users";

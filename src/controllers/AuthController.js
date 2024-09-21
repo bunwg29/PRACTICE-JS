@@ -1,3 +1,5 @@
+// This is AuthController class use for get data from AuthUserModel and interact with view
+
 import AuthUserModel from '@/model/AuthUserModel';
 
 export default class AuthController {
@@ -10,6 +12,7 @@ export default class AuthController {
       this.view = view;
    }
 
+   // This function use for get admin acount from api
    async login(username, password) {
       try {
          const users = await AuthUserModel.getAllAuthUsers();
@@ -22,11 +25,13 @@ export default class AuthController {
 
          return false;
       } catch (error) {
-         console.error('Lỗi đăng nhập:', error);
+         console.error('Login error!', error);
          return false;
       }
    }
 
+
+   // This function use for add a new account into api
    async register(username, password, email) {
       try {
          const users = await AuthUserModel.getAllAuthUsers();
@@ -39,17 +44,26 @@ export default class AuthController {
          const newId = Math.max(...users.map(u => u.id)) + 1;
          const newUser = new AuthUserModel(newId, username, password, email);
 
-         return true;
+         const addedUser = await AuthUserModel.addUser(newUser);
+
+         if (addedUser) {
+            return true;
+         }
+
+         return false;
+
       } catch (error) {
-         console.error('Lỗi đăng ký:', error);
+         console.error('Register error!', error);
          return false;
       }
    }
+
 
    logout() {
       localStorage.removeItem('currentUser');
    }
 
+   // Check account in localStorage
    isLoggedIn() {
       return localStorage.getItem('currentUser') !== null;
    }

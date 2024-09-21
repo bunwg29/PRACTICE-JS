@@ -1,13 +1,13 @@
-import header from './layouts/header';
-import menuTable from './components/menuTable';
-import menuTitle from './components/menuTitle';
-import renderAllUser from './utils/RenderUser';
-import FilterView from './utils/filterView';
-import AdditionOption from './utils/AdditionOption';
-import footer from './layouts/footer';
-import Pagination from './utils/Pagination';
-import { viewInfoHandle, addCheckboxEventListener } from '@/services/eventHandlers';
 import AuthController from '@/controllers/AuthController';
+import FilterView from './utils/filterView';
+import Pagination from './utils/Pagination';
+import AdditionOption from './utils/AdditionOption';
+import header from './layouts/header';
+import footer from './layouts/footer';
+import { createMainElement } from './utils/MainElement';
+import { renderContent } from './utils/ContentRenderer';
+import { setupEventListeners } from './utils/EventSetup';
+import AuthView from './AuthView';
 
 export default class View {
    constructor() {
@@ -19,119 +19,8 @@ export default class View {
       this.container = null;
       this.authController = new AuthController();
       this.authController.setView(this);
+      this.authView = new AuthView(this.authController);
    }
-
-   async LoginForm() {
-      const container = document.createElement('div');
-      container.className = 'login-container';
-      container.innerHTML = `
-        <h2>Đăng nhập</h2>
-        <form id="login-form">
-          <input type="text" id="username" placeholder="Tên đăng nhập" required>
-          <input type="password" id="password" placeholder="Mật khẩu" required>
-          <button type="submit">Đăng nhập</button>
-        </form>
-        <p>Chưa có tài khoản? <a href="/register">Đăng ký</a></p>
-      `;
-
-      container.querySelector('#login-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const success = await this.authController.login(username, password);
-        if (success) {
-          window.location.pathname = '/';
-        } else {
-          alert('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
-        }
-      });
-
-      return container;
-    }
-
-    async RegisterForm() {
-      const container = document.createElement('div');
-      container.className = 'register-container';
-      container.innerHTML = `
-        <h2>Đăng ký</h2>
-        <form id="register-form">
-          <input type="text" id="username" placeholder="Tên đăng nhập" required>
-          <input type="password" id="password" placeholder="Mật khẩu" required>
-          <input type="email" id="email" placeholder="Email" required>
-          <button type="submit">Đăng ký</button>
-        </form>
-        <p>Đã có tài khoản? <a href="/login">Đăng nhập</a></p>
-      `;
-
-      container.querySelector('#register-form').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const email = document.getElementById('email').value;
-        const success = await this.authController.register(username, password, email);
-        if (success) {
-          alert('Đăng ký thành công. Vui lòng đăng nhập.');
-          window.location.pathname = '/login';
-        } else {
-          alert('Đăng ký thất bại. Tên đăng nhập hoặc email đã tồn tại.');
-        }
-      });
-
-      return container;
-    }
-
-    async renderAuth() {
-      this.container = document.createElement('div');
-      this.container.className = 'auth-container';
-      this.container.innerHTML = this.renderLoginForm();
-
-      this.setupAuthEventListeners();
-
-      return this.container;
-    }
-
-    setupAuthEventListeners() {
-      this.container.addEventListener('submit', async (event) => {
-        event.preventDefault();
-        if (event.target.id === 'login-form') {
-          const username = this.container.querySelector('#login-username').value;
-          const password = this.container.querySelector('#login-password').value;
-          const success = await this.authController.login(username, password);
-          if (success) {
-            window.location.hash = '#dashboard';
-          } else {
-            alert('Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
-          }
-        } else if (event.target.id === 'register-form') {
-          const username = this.container.querySelector('#register-username').value;
-          const password = this.container.querySelector('#register-password').value;
-          const email = this.container.querySelector('#register-email').value;
-          const success = await this.authController.register(username, password, email);
-          if (success) {
-            alert('Đăng ký thành công. Vui lòng đăng nhập.');
-            this.container.innerHTML = this.renderLoginForm();
-          } else {
-            alert('Đăng ký thất bại. Tên đăng nhập hoặc email đã tồn tại.');
-          }
-        }
-      });
-
-      this.container.addEventListener('click', (event) => {
-        if (event.target.id === 'show-register') {
-          this.container.innerHTML = this.renderRegisterForm();
-        } else if (event.target.id === 'show-login') {
-          this.container.innerHTML = this.renderLoginForm();
-        }
-      });
-    }
-
-    async checkAuth() {
-      if (!this.authController.isLoggedIn()) {
-        window.location.hash = '#login';
-        return false;
-      }
-      return true;
-    }
 
    setUserController(userController) {
       this.userController = userController;
@@ -139,159 +28,17 @@ export default class View {
       this.additionOption = new AdditionOption(this.userController);
    }
 
-   createMainElement() {
-      const main = document.createElement('main');
-      main.className = 'main';
-      main.innerHTML += menuTable();
-      main.innerHTML += menuTitle();
-      return main;
-   }
-
-   async renderContent(users, usersElement) {
-      try {
-         const userHTML = renderAllUser.renderUsers(users);
-         usersElement.innerHTML = userHTML;
-      } catch (error) {
-         console.error('Error when render user:', error);
-         usersElement.innerHTML = 'Not found';
+   async checkAuth() {
+      if (!this.authController.isLoggedIn()) {
+         window.location.pathname = '/login';
+         return false;
       }
-   }
-
-   applyViewMoreListeners() {
-      const viewMoreButtons = this.container.querySelectorAll('.viewmore');
-      viewMoreButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-          event.stopPropagation();
-          const additionElement = event.target.closest('.addition');
-          if (additionElement) {
-            this.additionOption.displayOption(additionElement);
-          }
-        });
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!event.target.closest('.addition') && this.additionOption.currentOpenForm) {
-          this.additionOption.currentOpenForm.classList.add('hidden');
-          this.additionOption.currentOpenForm = null;
-        }
-      });
-   }
-
-   updatePagination() {
-      const currentRange = this.container.querySelector('.current-range');
-      const totalItems = this.container.querySelector('.total-items');
-      const prevButton = this.container.querySelector('.prev-page');
-      const nextButton = this.container.querySelector('.next-page');
-
-      if (currentRange && totalItems && prevButton && nextButton) {
-         const pageInfo = this.pagination.getPageInfo();
-         currentRange.textContent = pageInfo.currentRange;
-         totalItems.textContent = pageInfo.totalItems;
-
-         prevButton.disabled = pageInfo.currentPage === 1;
-         nextButton.disabled = pageInfo.currentPage === pageInfo.totalPages;
-      }
-   }
-
-   async renderPaginatedContent() {
-      const main = this.container.querySelector('.main');
-      if (!main) return;
-
-      const usersElement = main.querySelector('.user') || document.createElement('div');
-      usersElement.className = 'user';
-
-      const filteredAndSortedUsers = this.userController.applyFiltersAndSort();
-
-      this.currentUsers = filteredAndSortedUsers;
-
-      const paginatedUsers = this.pagination.getCurrentPageItems(this.currentUsers);
-      await this.renderContent(paginatedUsers, usersElement);
-
-      if (!main.contains(usersElement)) {
-          main.appendChild(usersElement);
-      }
-
-      this.updatePagination();
-      this.applyViewMoreListeners();
-      viewInfoHandle();
-      addCheckboxEventListener();
-   }
-
-
-
-   setupEventListeners() {
-      const filterButton = this.container.querySelector('.menu-left-filter');
-      if (filterButton) {
-         filterButton.addEventListener('click', () => {
-            this.filterView.displayFilter();
-         });
-      }
-
-      const itemsPerPageSelect = this.container.querySelector('.items-per-page');
-      if (itemsPerPageSelect) {
-         itemsPerPageSelect.addEventListener('change', (event) => {
-            const newItemsPerPage = parseInt(event.target.value, 10);
-            this.pagination.setItemsPerPage(newItemsPerPage);
-            this.renderPaginatedContent();
-         });
-      }
-
-      const prevButton = this.container.querySelector('.prev-page');
-      if (prevButton) {
-         prevButton.addEventListener('click', () => {
-            this.pagination.prevPage();
-            this.renderPaginatedContent();
-         });
-      }
-
-      const nextButton = this.container.querySelector('.next-page');
-      if (nextButton) {
-         nextButton.addEventListener('click', () => {
-            this.pagination.nextPage();
-            this.renderPaginatedContent();
-         });
-      }
-
-      const searchInput = this.container.querySelector('.menu-left-search input');
-         if (searchInput) {
-            searchInput.addEventListener('input', (event) => {
-               const query = event.target.value.trim().toLowerCase();
-               this.userController.handleSearch(query);
-            });
-         }
-         document.addEventListener('click', async (event) => {
-            if (event.target.classList.contains('menu-pay')) {
-               console.log("Pay button clicked");
-               const userId = this.getCurrentUserId();
-               console.log("Retrieved user ID:", userId);
-               if (userId) {
-                  const success = await this.userController.updatePaymentStatus(userId);
-                  if (success) {
-                     console.log("Payment status updated successfully");
-                     window.location.reload();
-                  } else {
-                     alert('Failed to update payment status. User may already be paid or not found.');
-                  }
-               } else {
-                  console.error("Could not determine user ID");
-                  alert('Could not determine user ID. Please make sure you are on a valid user page.');
-               }
-            }
-         });
-   }
-
-   getCurrentUserId() {
-      const path = window.location.pathname;
-      const match = path.match(/(\d+)$/);
-      if (match) {
-         console.log("Found user ID:", match[1]);
-         return parseInt(match[1]);
-      }
-      console.log("Could not find user ID in path:", path);
-      return null;
+      return true;
    }
 
    async renderUserType(fetchFunction) {
+      if (!(await this.checkAuth())) return;
+
       this.container = document.createElement('div');
       this.container.className = 'container';
 
@@ -299,23 +46,19 @@ export default class View {
       await header.updateTotalAmount(headerElement, this.userController);
       this.container.appendChild(headerElement);
 
-      const main = this.createMainElement();
+      const main = createMainElement();
       this.container.appendChild(main);
 
       try {
          this.filterView = new FilterView(this.userController, this);
          const users = await fetchFunction();
 
-
          this.currentUsers = users || [];
          this.pagination = new Pagination(10, this.currentUsers.length);
 
          this.container.innerHTML += footer();
-
          await this.renderPaginatedContent();
-         this.setupEventListeners();
-
-
+         setupEventListeners(this);
 
       } catch (error) {
          console.error('Error: ', error);
@@ -325,27 +68,31 @@ export default class View {
       return this.container;
    }
 
+   async renderPaginatedContent() {
+      await renderContent(this);
+   }
+
+   async LoginForm() {
+      return this.authView.LoginForm();
+   }
+
+   async RegisterForm() {
+      return this.authView.RegisterForm();
+   }
+
    async Dashboard() {
-      if (await this.checkAuth()) {
-         return this.renderUserType(this.userController.fetchAllUsers.bind(this.userController));
-      }
+      return this.renderUserType(this.userController.fetchAllUsers.bind(this.userController));
    }
 
    async PaidContent() {
-      if (await this.checkAuth()) {
-         return this.renderUserType(this.userController.fetchPaidUsers.bind(this.userController));
-      }
+      return this.renderUserType(this.userController.fetchPaidUsers.bind(this.userController));
    }
 
    async UnpaidContent() {
-      if (await this.checkAuth()) {
-         return this.renderUserType(this.userController.fetchUnpaidUsers.bind(this.userController));
-      }
+      return this.renderUserType(this.userController.fetchUnpaidUsers.bind(this.userController));
    }
 
    async OverdueContent() {
-      if (await this.checkAuth()) {
-         return this.renderUserType(this.userController.fetchOverdueUsers.bind(this.userController));
-      }
+      return this.renderUserType(this.userController.fetchOverdueUsers.bind(this.userController));
    }
 }

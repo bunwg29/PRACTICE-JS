@@ -1,56 +1,51 @@
 @use "../abtracts/" as *;
 
 .menu {
-   padding: 20px 10px;
-   @include flexStyle(space-between, center, row);
+  @include padding(20px, 10px);
+  @include flexStyle(space-between, center, row);
 
+  & > * {
+    @include flexStyle(space-around, center, row);
+  }
 
-   & > * {
-      @include flexStyle(space-around, center, row);
+  &-left {
+    @include flexStyle(space-between, center, row);
+    gap: 10%;
+    width: 40%;
 
-   }
+    & > * {
+      @include flexStyle(space-between, center, row);
+      gap: 5%;
+    }
 
-   &-left > * {
-         @include flexStyle(space-between, center, row);
-         gap: 5%;
+    &-filter {
+      @include position(relative);
+      @include padding(2%);
+      @include border-radius(10px);
+      @include bg-color($bgcl-item-profile);
+      border: solid $bd-color;
+    }
 
-   }
+    &-search {
+      @include size(100%);
+      @include padding(2%);
+      @include border-radius(10px);
+      @include bg-color($bgcl-main);
 
-   &-left {
-      gap: 10%;
-      width: 40%;
-      &-filter {
-         position: relative;
-         padding: 2%;
-         border-radius: 10px;
-         background-color: $bgcl-item-profile;
-         border-color: $bd-color;
-         border-style: solid;
+      input {
+        @include size(100%);
+        @include bg-color($bgcl-main);
+        border: none;
+        outline: none;
       }
+    }
+  }
 
-      &-search {
-         width: 100%;
-         padding: 2%;
-         border-radius: 10px;
-         background-color: $bgcl-main;
-         input {
-            width: 100%;
-            background-color: $bgcl-main;
-            border: none;
-            outline: none;
-         }
-      }
-
-   }
-
-
-
-   &-pay {
-      padding: 1%;
-      @include font ($primary-font, $fs-big, $fw-button);
-      border-radius: 10px;
-      border: none;
-      color: $bgcl-item-profile;
-      background-color: $bgcl-buttonPay;
-   }
+  &-pay {
+    @include padding(1%);
+    @include font($primary-font, $fs-big, $fw-button);
+    @include border-radius(10px);
+    @include bg-color($bgcl-buttonPay, $bgcl-item-profile);
+    border: none;
+  }
 }

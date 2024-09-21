@@ -1,7 +1,7 @@
 import './main.scss';
 import './router/processRoutes';
 import processRoutes from './router/processRoutes';
-import UserController from './controllers/UserController';
+import UserController from './controllers/userController';
 import AuthController from './controllers/AuthController';
 import View from './view/view';
 

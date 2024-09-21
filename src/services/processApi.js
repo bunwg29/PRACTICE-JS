@@ -2,7 +2,7 @@
 
 import { getApi } from "./apiDataConfig";
 
-const urlAPI = "http://localhost:3000/user_data";
+const urlAPI = "https://my-json-server.typicode.com/bunwg29/PRACTICE-JS/user_data";
 
 const getAllUser = () => {
 

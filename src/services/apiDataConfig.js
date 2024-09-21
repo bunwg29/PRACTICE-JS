@@ -2,8 +2,9 @@
 
 import axios from "axios";
 
-const urlAPI = "http://localhost:3000/user_data";
-
+const urlAPI = "https://my-json-server.typicode.com/bunwg29/PRACTICE-JS/user_data";
+//https://my-json-server.typicode.com/bunwg29/PRACTICE-JS/user_data
+//http://localhost:3000/user_data
 async function getApi (url) {
 
    try {

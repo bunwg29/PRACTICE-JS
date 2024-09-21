@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "database": "json-server --watch src/database.json",
+    "database": "json-server --watch db.json",
     "format": "prettier --write \"src/**/*.{js,jsx,html,css,scss}\"",
     "prepare": "husky install"
   },

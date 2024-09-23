@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --emptyOutDir",
     "preview": "vite preview",
     "database": "json-server --watch db.json",
     "format": "prettier --write \"src/**/*.{js,jsx,html,css,scss}\"",

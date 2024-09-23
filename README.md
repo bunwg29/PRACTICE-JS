@@ -19,7 +19,7 @@
   - Json Server
      <br/>
 # **DESIGN:**  
-- [here]([https://www.figma.com/file/PIppeaHvppAcWSTgsvH53D/NFT-Marketplace-Template---Create-an-NFT-website-in-minutes-(Community)?type=design&node-id=2125-14107&mode=design&t=QQC0BokGup335jZ9-0](https://www.figma.com/design/0mIHx1OBDpWd6PU6r188JJ/Data-Table-v2-(Community)?node-id=766-1348&t=L6Cxj3MsO7hX9cty-0))
+- [here](https://www.figma.com/design/0mIHx1OBDpWd6PU6r188JJ/Data-Table-v2-(Community)?node-id=766-1348&node-type=frame&t=4WDHC7cpJGQthYSP-0)
 # **SOURCE CODE:**
 - `To start: Clone project: git clone:` [here](https://github.com/bunwg29/PRACTICE-JS).
 # **HOW TO RUN:**

@@ -2,7 +2,7 @@
 
 import { getApi } from "./apiDataConfig";
 
-const urlAPI = "https://my-json-server.typicode.com/bunwg29/PRACTICE-JS/user_data";
+const urlAPI = "https://js-server-pr.onrender.com/user_data";
 
 const getAllUser = () => {
 

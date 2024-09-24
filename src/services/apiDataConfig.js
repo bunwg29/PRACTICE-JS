@@ -2,8 +2,8 @@
 
 import axios from "axios";
 
-const urlAPI = "https://my-json-server.typicode.com/bunwg29/PRACTICE-JS/user_data";
-//https://my-json-server.typicode.com/bunwg29/PRACTICE-JS/user_data
+const urlAPI = "https://js-server-pr.onrender.com/user_data";
+
 //http://localhost:3000/user_data
 async function getApi (url) {
 

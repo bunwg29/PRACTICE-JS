@@ -2,7 +2,7 @@
 
 import { getAuthUser } from "./apiUserConfig.js";
 
-const userAPI = "https://my-json-server.typicode.com/bunwg29/PRACTICE-JS/auth_users";
+const userAPI = "https://js-server-pr.onrender.com/auth_users";
 
 const getAccount = () => {
 

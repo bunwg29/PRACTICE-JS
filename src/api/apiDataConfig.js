@@ -4,7 +4,6 @@ import axios from "axios";
 
 const urlAPI = "https://js-server-pr.onrender.com/user_data";
 
-//http://localhost:3000/user_data
 async function getApi (url) {
 
    try {

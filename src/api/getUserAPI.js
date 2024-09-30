@@ -11,7 +11,7 @@ const getAccount = () => {
       return data;
    })
    .catch(error => {
-      onsole.log(error);
+      console.log(error);
    });
 
 }

@@ -3,8 +3,6 @@
 import axios from "axios";
 
 const urlAuthUsers = "https://js-server-pr.onrender.com/auth_users";
-//https://my-json-server.typicode.com/bunwg29/PRACTICE-JS/auth_users
-//http://localhost:3000/auth_users
 
 async function getAuthUser(url) {
   try {

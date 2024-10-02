@@ -1,5 +1,5 @@
 // AuthUserService.js
-import { getAccount } from './getUserAPI.js/index.js';
+import { getAccount } from './getUserAPI.js';
 import { authUsersApi } from '@/api/apiUserConfig.js';
 import AuthUserModel from '@/model/AuthUserModel.js';
 

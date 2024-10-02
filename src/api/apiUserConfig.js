@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-const urlAuthUsers = "https://js-server-pr.onrender.com/auth_users";
+import { API_ENDPOINTS } from "./config.js";
 
 async function getAuthUser(url) {
   try {
@@ -19,7 +19,7 @@ async function getAuthUser(url) {
 }
 
 export const authUsersApi = axios.create({
-  baseURL: urlAuthUsers,
+  baseURL: API_ENDPOINTS.AUTH_USERS
 });
 
 export { getAuthUser };

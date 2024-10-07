@@ -1,10 +1,9 @@
 // This is configuration of api interface data
 
 import axios from "axios";
+import { API_ENDPOINTS } from "./config.js";
 
-const urlAPI = "https://js-server-pr.onrender.com/user_data";
 
-//http://localhost:3000/user_data
 async function getApi (url) {
 
    try {
@@ -21,7 +20,7 @@ async function getApi (url) {
 
 }
 export default axios.create({
-   baseURL: urlAPI
+   baseURL: API_ENDPOINTS.USER_DATA
 });
 
 export {getApi};

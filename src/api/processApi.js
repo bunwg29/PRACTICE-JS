@@ -2,11 +2,11 @@
 
 import { getApi } from "./apiDataConfig";
 
-const urlAPI = "https://js-server-pr.onrender.com/user_data";
+import { API_ENDPOINTS } from "./config.js";
 
 const getAllUser = () => {
 
-   return getApi(urlAPI)
+   return getApi(API_ENDPOINTS.USER_DATA)
    .then( data => {
       return data;
    })
@@ -17,7 +17,7 @@ const getAllUser = () => {
 }
 const getPaidUser = () => {
 
-   return getApi(urlAPI)
+   return getApi(API_ENDPOINTS.USER_DATA)
    .then( data => {
      return data.filter(user => user.paid_status === "Paid");
    })
@@ -29,7 +29,7 @@ const getPaidUser = () => {
 
 const getUnPaidUser = () => {
 
-   return getApi(urlAPI)
+   return getApi(API_ENDPOINTS.USER_DATA)
    .then( data => {
       return data.filter(user => user.paid_status === "Unpaid");
    })
@@ -41,7 +41,7 @@ const getUnPaidUser = () => {
 
 const getOverdueUser = () => {
 
-   return getApi(urlAPI)
+   return getApi(API_ENDPOINTS.USER_DATA)
    .then( data => {
       return data.filter(user => user.paid_status === "Overdue");
    })

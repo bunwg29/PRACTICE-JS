@@ -1,17 +1,17 @@
 // This function use for interact with admin account api
 
 import { getAuthUser } from "./apiUserConfig.js";
+import { API_ENDPOINTS } from "./config.js";
 
-const userAPI = "https://js-server-pr.onrender.com/auth_users";
 
 const getAccount = () => {
 
-   return getAuthUser(userAPI)
+   return getAuthUser(API_ENDPOINTS.AUTH_USERS)
    .then(data => {
       return data;
    })
    .catch(error => {
-      onsole.log(error);
+      console.log(error);
    });
 
 }
